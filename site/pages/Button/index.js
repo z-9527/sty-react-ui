@@ -6,7 +6,7 @@ class ButtonPage extends Component {
   state = {}
   render() {
     return (
-      <div className='page-box button-demo'>
+      <div className='button-demo'>
         <div className='section-title'>按钮类型</div>
         <Button>default</Button>
         <Button type="primary">primary</Button>

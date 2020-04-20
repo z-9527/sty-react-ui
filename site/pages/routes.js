@@ -3,6 +3,7 @@ import Home from './Home';
 
 const ButtonPage = asyncComponent(() => import('./Button'));
 const LoadingPage = asyncComponent(() => import('./Loading'));
+const TabsPage = asyncComponent(() => import('./Tabs'));
 
 const routes = [
   {
@@ -17,6 +18,10 @@ const routes = [
   {
     path: '/loading',
     component: LoadingPage
+  },
+  {
+    path: '/tabs',
+    component: TabsPage
   }
 
 ];

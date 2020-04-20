@@ -1,3 +1,7 @@
+body{
+  color: #323233;
+}
+
 .forward-enter {
   z-index: 2;
   /* opacity: 0; */
@@ -45,10 +49,6 @@
   /* opacity: 0; */
   transform: translate(100%);
   transition: all 500ms;
-}
-
-.page-box {
-  padding: 16px;
 }
 
 .section-title {

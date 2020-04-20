@@ -6,7 +6,7 @@ class LoadingPage extends Component {
   state = {}
   render() {
     return (
-      <div className="page-box loading-demo">
+      <div className="loading-demo">
         <div className='section-title'>加载类型</div>
         <Loading />
         <Loading type="spinner" />
