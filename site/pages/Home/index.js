@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-class Test extends Component {
-  state = {}
+class Home extends Component {
+  state = { }
   render() {
     return (
       <div>
-        test
+        home
       </div>
     );
   }
 }
 
-export default Test;
+export default Home;

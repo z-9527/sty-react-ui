@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --open --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.prod.js",
     "analyz": "webpack-bundle-analyzer --port 8001 ./build/stats.json",
-    "lint": "eslint src"
+    "lint": "eslint site"
   },
   "husky": {
     "hooks": {
@@ -46,6 +46,9 @@
   },
   "dependencies": {
     "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react-dom": "^16.11.0",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.1.2",
+    "react-transition-group": "^4.3.0"
   }
 }

@@ -14,7 +14,7 @@ function resolve(dir) {
 module.exports = {
   context: path.resolve(__dirname, '../'), // 入口起点根目录
   entry: {
-    app: './src/index.js'
+    app: './site/index.js'
   },
   output: {
     path: resolve('build'),
@@ -24,14 +24,15 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': resolve('src')
+      '@site': resolve('site'),
+      '@component': resolve('component')
     },
     extensions: ['.js', '.jsx']
   },
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM'
-  },
+  // externals: {
+  //   react: 'React',
+  //   'react-dom': 'ReactDOM'
+  // },
   optimization: {
     // splitChunks: {
     //   chunks: 'all'
@@ -97,7 +98,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './site/index.html',
       minify: {
         collapseWhitespace: true// 删除空格、换行
       }

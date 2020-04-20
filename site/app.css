@@ -1,0 +1,52 @@
+.router-wrapper {
+  overflow: hidden;
+}
+
+.forward-enter {
+  z-index: 2;
+  /* opacity: 0; */
+  transform: translateX(100%);
+}
+
+.forward-enter-active {
+  z-index: 2;
+  /* opacity: 1; */
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.forward-exit {
+  z-index: 1;
+  /* opacity: 1; */
+}
+
+.forward-exit-active {
+  z-index: 1;
+  /* opacity: .3; */
+  transition: all 500ms;
+}
+
+.back-enter {
+  z-index: 1;
+  /* opacity: .3; */
+}
+
+.back-enter-active {
+  z-index: 1;
+  /* opacity: 1; */
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.back-exit {
+  z-index: 2;
+  /* opacity: 1; */
+  transform: translateX(0);
+}
+
+.back-exit-active {
+  z-index: 2;
+  /* opacity: 0; */
+  transform: translate(100%);
+  transition: all 500ms;
+}
