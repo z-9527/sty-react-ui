@@ -71,6 +71,21 @@ module.exports = {
         ]
       },
       {
+        test: /\.less$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+              // if hmr does not work, this is a forceful method.
+              reloadAll: true
+            }
+          },
+          'css-loader',
+          'less-loader'
+        ]
+      },
+      {
         test: /\.(png|jpe?g|svg|gif)(\?.*)?$/,
         loader: 'url-loader',
         options: {

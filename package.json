@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --open --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.prod.js",
     "analyz": "webpack-bundle-analyzer --port 8001 ./build/stats.json",
-    "lint": "eslint site"
+    "lint": "eslint site components"
   },
   "husky": {
     "hooks": {
@@ -35,6 +35,8 @@
     "eslint-plugin-standard": "^4.0.1",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^4.0.0-beta.5",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "style-loader": "^1.0.0",
