@@ -1,7 +1,8 @@
 import asyncComponent from './asyncComponent';
 import Home from './Home';
 
-const Button = asyncComponent(() => import('./Button'));
+const ButtonPage = asyncComponent(() => import('./Button'));
+const LoadingPage = asyncComponent(() => import('./Loading'));
 
 const routes = [
   {
@@ -11,8 +12,13 @@ const routes = [
   },
   {
     path: '/button',
-    component: Button
+    component: ButtonPage
+  },
+  {
+    path: '/loading',
+    component: LoadingPage
   }
+
 ];
 
 export default routes;
