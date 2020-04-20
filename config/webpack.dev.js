@@ -7,6 +7,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: './index.html',
     hot: true,
-    port: 3000
+    port: 3000,
+    inline: true
   }
 });

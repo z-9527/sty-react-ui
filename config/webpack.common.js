@@ -25,7 +25,7 @@ module.exports = {
   resolve: {
     alias: {
       '@site': resolve('site'),
-      '@component': resolve('component')
+      '@components': resolve('components')
     },
     extensions: ['.js', '.jsx']
   },
@@ -98,7 +98,8 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'static/font/[name].[hash:7].[ext]'
+          name: 'static/font/[name].[hash:7].[ext]',
+          publicPath: '../../' // 字体在css中，路径要退两层
         }
       },
       {
