@@ -18,7 +18,7 @@ class TabsPage extends Component {
   render() {
     const { activeTab } = this.state;
     return (
-      <div className='tabs-demo'>
+      <div className='tabs-demo gray-bg'>
         <div className='section-title'>基本用法</div>
         <Tabs activeTab={activeTab} onNavItemClick={this.onChange}>
           <TabPane title='标签1'>内容1</TabPane>

@@ -53,11 +53,11 @@ class Tabs extends Component {
   }
 
   renderContent = () => {
-    const { prefixCls, children } = this.props;
+    const { prefixCls, tabBarPosition, children } = this.props;
     const { activeIndex } = this.state;
     return React.Children.map(children, (item, index) => {
       if (item.type === TabPane) {
-        return React.cloneElement(item, { ...item.props, prefixCls, activeIndex, index });
+        return React.cloneElement(item, { ...item.props, prefixCls, activeIndex, index, tabBarPosition });
       }
       return null;
     });
@@ -198,11 +198,18 @@ class Tabs extends Component {
 }
 
 const TabPane = (props) => {
-  const { className, prefixCls, children, activeIndex, style = {}, index, ...other } = props;
+  const { className, prefixCls, children, activeIndex, tabBarPosition, style = {}, index, ...other } = props;
+  const sty = style;
+  if (activeIndex === index) {
+    sty.overflow = 'auto';
+  } else {
+    sty.overflow = 'visible';
+    sty.height = ['right', 'left'].includes(tabBarPosition) ? '100%' : 0;
+  }
   return (
     <div
       className={classnames(`${prefixCls}-tabPane`, className)}
-      style={{ ...style, overflow: activeIndex === index ? 'auto' : 'visible' }}
+      style={sty}
       {...other}>
       {children}
     </div>
