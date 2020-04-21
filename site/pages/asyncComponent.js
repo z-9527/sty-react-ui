@@ -1,7 +1,21 @@
 import React from 'react';
+import Loading from '@components/loading';
+
+const style = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100vw',
+  height: '100vh',
+  background: '#fff'
+};
 
 const DefaultLoading = () => {
-  return <div>loading...</div>;
+  return (
+    <div style={style}>
+      <Loading vertical>加载中...</Loading>
+    </div>
+  );
 };
 
 // 这个函数主要是解决路由懒加载和路由动画第一次不生效的

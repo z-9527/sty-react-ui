@@ -70,3 +70,12 @@ body {
   min-height: calc(100vh - 47px);
   padding-bottom: 16px;
 }
+
+.page-box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f7f8fa;
+}

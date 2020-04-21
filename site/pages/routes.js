@@ -1,3 +1,4 @@
+import React from 'react';
 import asyncComponent from './asyncComponent';
 import Home from './Home';
 
@@ -8,7 +9,7 @@ const IconPage = asyncComponent(() => import('./Icon'));
 const IndexListPage = asyncComponent(() => import('./IndexList'));
 const NavBarPage = asyncComponent(() => import('./NavBar'));
 
-const routes = [
+let routes = [
   {
     path: '/',
     exact: true,
@@ -38,7 +39,11 @@ const routes = [
     path: '/nav-bar',
     component: NavBarPage
   }
-
 ];
+
+routes = routes.map(i => ({
+  ...i,
+  component: () => <div className='page-box'><i.component /></div> // 用div将懒加载的代码包裹起来，防止路由动画不起作用
+}));
 
 export default routes;
