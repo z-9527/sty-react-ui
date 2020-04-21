@@ -185,9 +185,11 @@ class Tabs extends Component {
 
     return (
       <div className={classnames(`${prefixCls} ${prefixCls}-${tabBarPosition}`, className)} {...other}>
-        <div ref={el => (this.tabBar = el)} className={`${prefixCls}-tab-bar`}>
-          {this.renderTabBar()}
-          <div ref={el => (this.line = el)} className={`${prefixCls}-line`} style={{ backgroundColor: lineColor }} />
+        <div className={`${prefixCls}-tab-bar-wrapper`}>
+          <div ref={el => (this.tabBar = el)} className={`${prefixCls}-tab-bar`}>
+            {this.renderTabBar()}
+            <div ref={el => (this.line = el)} className={`${prefixCls}-line`} style={{ backgroundColor: lineColor }} />
+          </div>
         </div>
         <div className={classnames({ [`${prefixCls}-content`]: true, [`${prefixCls}-content-animated`]: animated })} ref={el => this.tabsContent = el}>
           {this.renderContent()}
@@ -203,7 +205,7 @@ const TabPane = (props) => {
   if (activeIndex === index) {
     sty.overflow = 'auto';
   } else {
-    sty.overflow = 'visible';
+    sty.overflow = 'hidden';
     sty.height = ['right', 'left'].includes(tabBarPosition) ? '100%' : 0;
   }
   return (

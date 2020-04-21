@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   font-size: 0;   //少了这个样式后，button的旋转一直有问题，找了一下午bug
-  color: #c8c9cc;
+  color: @loading-color;
 
   &&-vertical{
     flex-direction: column;
@@ -20,7 +20,7 @@
     margin-left: 8px;
     font-size: 14px;
     vertical-align: middle;
-    color: #969799;
+    color: @loading-text-color;
 
     .@{loadingPrefixCls}-vertical &{
       margin-top: 8px;

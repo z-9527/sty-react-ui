@@ -3,7 +3,6 @@ import Tabs from '@components/tabs';
 import Icon from '@components/icon';
 import data from './data';
 import './index.less';
-console.log('data: ', data);
 
 const TabPane = Tabs.TabPane;
 

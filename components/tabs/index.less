@@ -25,11 +25,14 @@
     align-items: stretch;
   }
 
-  &-tab-bar {
-    display: flex;
+  &-tab-bar-wrapper {
     position: relative;
-    overflow: auto;
-    flex-shrink: 0;
+    height: 100%;
+
+    .@{tabsPrefixCls}-left &,
+    .@{tabsPrefixCls}-right & {
+      width: 25%;
+    }
 
     &::after {
       position: absolute;
@@ -41,16 +44,34 @@
       bottom: -50%;
       left: -50%;
       transform: scale(0.5);
+
+      .@{tabsPrefixCls}-left & {
+        border-right: 1px solid @base-border-color;
+      }
+
+      .@{tabsPrefixCls}-left & {
+        border-left: 1px solid @base-border-color;
+      }
+
+      .@{tabsPrefixCls}-top &,
+      .@{tabsPrefixCls}-bottom & {
+        border-bottom: 1px solid @base-border-color;
+      }
+
     }
+
+  }
+
+  &-tab-bar {
+    display: flex;
+    position: relative;
+    overflow: auto;
+    flex-shrink: 0;
 
     .@{tabsPrefixCls}-top &,
     .@{tabsPrefixCls}-bottom & {
       flex-direction: row;
       width: 100%;
-
-      &::after {
-        border-bottom: 1px solid #ebedf0;
-      }
 
       .@{tabsPrefixCls}-bar-tab {
         min-width: 25%;
@@ -62,7 +83,7 @@
     .@{tabsPrefixCls}-right & {
       flex-direction: column;
       height: 100%;
-      width: 25%;
+      width: 100%;
 
       .@{tabsPrefixCls}-bar-tab {
         width: 100%;
@@ -70,16 +91,6 @@
         padding: 0 8px;
       }
     }
-
-    .@{tabsPrefixCls}-left &::after {
-      border-right: 1px solid #ebedf0;
-    }
-
-    .@{tabsPrefixCls}-left &::after {
-      border-left: 1px solid #ebedf0;
-    }
-
-
 
     &::-webkit-scrollbar {
       display: none;
@@ -91,7 +102,7 @@
       align-items: center;
       flex: 1;
       box-sizing: border-box;
-      color: #646566;
+      color: @tabs-text-color;
 
       &-title {
         text-overflow: ellipsis;
