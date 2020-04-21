@@ -6,6 +6,7 @@ const LoadingPage = asyncComponent(() => import('./Loading'));
 const TabsPage = asyncComponent(() => import('./Tabs'));
 const IconPage = asyncComponent(() => import('./Icon'));
 const IndexListPage = asyncComponent(() => import('./IndexList'));
+const NavBarPage = asyncComponent(() => import('./NavBar'));
 
 const routes = [
   {
@@ -32,6 +33,10 @@ const routes = [
   {
     path: '/index-list',
     component: IndexListPage
+  },
+  {
+    path: '/nav-bar',
+    component: NavBarPage
   }
 
 ];

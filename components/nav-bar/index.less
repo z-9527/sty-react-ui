@@ -1,0 +1,41 @@
+@import '../style/default.less';
+
+@navbarPrefixCls: sty-navbar;
+
+.@{navbarPrefixCls} {
+  position: relative;
+  height: @navbar-height;
+  line-height: @navbar-height;
+  text-align: center;
+  background-color: #fff;
+  color: @navbar-text-color;
+
+  &-left,
+  &-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  &-left {
+    left: 0;
+  }
+
+  &-right {
+    right: 0;
+  }
+
+  &-title {
+    max-width: 60%;
+    margin: 0 auto;
+    color: @base-text-color;
+    font-weight: 500;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

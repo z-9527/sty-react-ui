@@ -6,6 +6,7 @@ import routes from './pages/routes';
 import './app.css';
 
 // 页面过渡动画参考这里https://juejin.im/post/5cb1e4275188251ace1feee9
+// 请用高本版的node启动项目
 
 const ANIMATION_MAP = {
   PUSH: 'forward',
