@@ -17,7 +17,7 @@ class IndexListPage extends Component {
   state = {}
   render() {
     return (
-      <div>
+      <div className='page-box'>
         <IndexList>
           {list.map(item => (
             <Section key={item.index} index={item.index}>

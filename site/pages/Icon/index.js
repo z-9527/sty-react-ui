@@ -10,7 +10,7 @@ class IconPage extends Component {
   state = {}
   render() {
     return (
-      <div className='icon-demo gray-bg'>
+      <div className='icon-demo page-box'>
         <Tabs animated={true}>
           {data.map(item => (
             <TabPane title={item.title} key={item.title}>
