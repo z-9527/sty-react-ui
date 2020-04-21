@@ -27,6 +27,6 @@ module.exports = {
     "space-before-function-paren": 0,
     "no-unused-vars": 1,
     "react/prop-types": [1, { ignore: ['className', 'style', 'children'] }], //定义是否检测propTypes
-    "no-return-assign": 1
+    "no-return-assign": 0
   }
 }

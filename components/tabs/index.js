@@ -200,6 +200,7 @@ class Tabs extends Component {
 }
 
 const TabPane = (props) => {
+  // eslint-disable-next-line react/prop-types
   const { className, prefixCls, children, activeIndex, tabBarPosition, style = {}, index, ...other } = props;
   const sty = style;
   if (activeIndex === index) {

@@ -5,6 +5,7 @@ const ButtonPage = asyncComponent(() => import('./Button'));
 const LoadingPage = asyncComponent(() => import('./Loading'));
 const TabsPage = asyncComponent(() => import('./Tabs'));
 const IconPage = asyncComponent(() => import('./Icon'));
+const IndexListPage = asyncComponent(() => import('./IndexList'));
 
 const routes = [
   {
@@ -27,6 +28,10 @@ const routes = [
   {
     path: '/icon',
     component: IconPage
+  },
+  {
+    path: '/index-list',
+    component: IndexListPage
   }
 
 ];
