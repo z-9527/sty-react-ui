@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import IndexList from '@components/index-list';
+import renderHeader from '../renderHeader';
 
 const { Section, Cell } = IndexList;
 
@@ -13,11 +14,12 @@ const list = [];
   });
 });
 
+@renderHeader('IndexList')
 class IndexListPage extends Component {
   state = {}
   render() {
     return (
-      <div className='page-box'>
+      <div className='demo-box'>
         <IndexList>
           {list.map(item => (
             <Section key={item.index} index={item.index}>

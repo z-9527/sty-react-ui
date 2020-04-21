@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Button from '@components/button';
+import renderHeader from '../renderHeader';
 import './index.less';
 
+@renderHeader('Button')
 class ButtonPage extends Component {
   state = {}
   render() {
     return (
-      <div className='button-demo page-box'>
+      <div className='button-demo demo-box'>
         <div className='section-title'>按钮类型</div>
         <Button>default</Button>
         <Button type="primary">primary</Button>

@@ -65,8 +65,8 @@ body {
   color: rgba(69, 90, 100, 0.6);
 }
 
-.page-box {
+.demo-box{
   box-sizing: border-box;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 47px);
   padding-bottom: 16px;
 }

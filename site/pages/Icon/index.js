@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import Tabs from '@components/tabs';
 import Icon from '@components/icon';
 import data from './data';
+import renderHeader from '../renderHeader';
 import './index.less';
 
 const TabPane = Tabs.TabPane;
 
+@renderHeader('Icon')
 class IconPage extends Component {
   state = {}
   render() {
     return (
-      <div className='icon-demo page-box'>
+      <div className='icon-demo demo-box'>
         <Tabs animated={true}>
           {data.map(item => (
             <TabPane title={item.title} key={item.title}>

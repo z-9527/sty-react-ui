@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Tabs from '@components/tabs';
+import renderHeader from '../renderHeader';
 import './index.less';
 
 const TabPane = Tabs.TabPane;
 
+@renderHeader('Tabs')
 class TabsPage extends Component {
   state = {
     activeTab: 0
@@ -18,7 +20,7 @@ class TabsPage extends Component {
   render() {
     const { activeTab } = this.state;
     return (
-      <div className='tabs-demo page-box'>
+      <div className='tabs-demo demo-box'>
         <div className='section-title'>基本用法</div>
         <Tabs activeTab={activeTab} onNavItemClick={this.onChange}>
           <TabPane title='标签1'>内容1</TabPane>

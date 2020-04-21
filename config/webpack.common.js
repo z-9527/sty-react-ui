@@ -49,7 +49,11 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-react'],
-              plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-syntax-dynamic-import']
+              plugins: [
+                ['@babel/plugin-proposal-decorators', { legacy: true }],
+                '@babel/plugin-proposal-class-properties',
+                '@babel/plugin-syntax-dynamic-import'
+              ]
             }
           },
           'eslint-loader'

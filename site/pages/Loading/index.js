@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Loading from '@components/loading';
+import renderHeader from '../renderHeader';
 import './index.less';
 
+@renderHeader('Loading')
 class LoadingPage extends Component {
   state = {}
   render() {
     return (
-      <div className="loading-demo page-box">
+      <div className="loading-demo demo-box">
         <div className='section-title'>加载类型</div>
         <Loading />
         <Loading type="spinner" />
