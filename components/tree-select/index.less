@@ -1,0 +1,65 @@
+@import '../style/default.less';
+
+@treeSelectPrefixCls: sty-tree-select;
+
+.@{treeSelectPrefixCls} {
+  display: flex;
+  color: @base-text-color;
+
+  &-sidebar {
+    flex: 1;
+    height: 100%;
+    background-color: @tree-select-nav-bg;
+    overflow: hidden;
+
+    &-item {
+      width: 100%;
+      padding: 12px 8px 12px 12px;
+      box-sizing: border-box;
+      border-left: 3px solid transparent;
+      font-weight: 400;
+
+      &.active {
+        background-color: #fff;
+        border-color: @base-color;
+      }
+
+      &.disabled {
+        color: @base-text-disabled;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &-content {
+    flex: 2;
+    height: 100%;
+    background-color: #fff;
+
+    &-item {
+      position: relative;
+      padding: 0 32px 0 16px;
+      font-weight: 400;
+      height: 44px;
+      line-height: 44px;
+      box-sizing: border-box;
+
+      .select-icon {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        margin-top: -8px;
+        font-size: 16px;
+      }
+
+      &.active {
+        color: @base-color;
+      }
+
+      &.disabled {
+        color: @base-text-disabled;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

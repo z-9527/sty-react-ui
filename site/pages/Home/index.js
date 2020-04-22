@@ -14,6 +14,7 @@ class Home extends Component {
           <li><Link to='/index-list'>index-list</Link></li>
           <li><Link to='/nav-bar'>nav-bar</Link></li>
           <li><Link to='/timeline'>timeline</Link></li>
+          <li><Link to='/tree-select'>tree-select</Link></li>
         </ul>
       </div>
     );

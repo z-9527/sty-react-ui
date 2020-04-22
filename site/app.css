@@ -54,12 +54,14 @@ body {
 }
 
 .section-title {
+  position: relative;
   padding: 20px 0 16px;
   font-size: 14px;
   color: rgba(69, 90, 100, 0.6);
 }
 
 .section-title-pl {
+  position: relative;
   padding: 20px 16px 16px;
   font-size: 14px;
   color: rgba(69, 90, 100, 0.6);
