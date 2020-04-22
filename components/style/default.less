@@ -14,3 +14,24 @@
 
 @navbar-height: 47px;
 @navbar-text-color: #1989fa;
+
+@timeline-line-color: #dcdee3;
+@timeline-dot-color: #80d0c780;
+@timeline-dot-boder-color: #80d0c733;
+@timeline-content-color: #666;
+@timeline-time-color: #969799;
+
+
+
+[class*='sty-hairline']::after{
+  position: absolute;
+    box-sizing: border-box;
+    content: ' ';
+    pointer-events: none;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    border: 0 solid #ebedf0;
+    transform: scale(0.5);
+}

@@ -7,7 +7,11 @@ class Icon extends Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     color: PropTypes.string, // icon颜色
-    type: PropTypes.string // 内置icon名称
+    type: PropTypes.string, // 内置icon名称
+    size: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ])
   }
 
   static defaultProps = {
@@ -16,14 +20,14 @@ class Icon extends Component {
 
   state = {}
   render() {
-    const { prefixCls, className, color, style = {}, type, ...other } = this.props;
+    const { prefixCls, className, color, style = {}, size, type, ...other } = this.props;
     const cls = {
       [`${prefixCls}`]: true,
       [`${prefixCls}-${type}`]: type,
       [className]: className
     };
     return (
-      <i className={classnames(cls)} style={{ ...style, color }} {...other} />
+      <i className={classnames(cls)} style={{ ...style, color, fontSize: `${size}px` }} {...other} />
     );
   }
 }

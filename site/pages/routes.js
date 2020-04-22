@@ -8,6 +8,7 @@ const TabsPage = asyncComponent(() => import('./Tabs'));
 const IconPage = asyncComponent(() => import('./Icon'));
 const IndexListPage = asyncComponent(() => import('./IndexList'));
 const NavBarPage = asyncComponent(() => import('./NavBar'));
+const TimeLinePage = asyncComponent(() => import('./TimeLine'));
 
 let routes = [
   {
@@ -38,6 +39,10 @@ let routes = [
   {
     path: '/nav-bar',
     component: NavBarPage
+  },
+  {
+    path: '/timeline',
+    component: TimeLinePage
   }
 ];
 
