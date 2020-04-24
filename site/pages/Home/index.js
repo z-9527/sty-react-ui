@@ -16,6 +16,7 @@ class Home extends Component {
           <li><Link to='/timeline'>timeline</Link></li>
           <li><Link to='/tree-select'>tree-select</Link></li>
           <li><Link to='/popup'>PopupPage</Link></li>
+          <li><Link to='/cell'>CellPage</Link></li>
         </ul>
       </div>
     );

@@ -11,6 +11,7 @@ const NavBarPage = asyncComponent(() => import('./NavBar'));
 const TimeLinePage = asyncComponent(() => import('./TimeLine'));
 const TreeSelectPage = asyncComponent(() => import('./TreeSelect'));
 const PopupPage = asyncComponent(() => import('./Popup'));
+const CellPage = asyncComponent(() => import('./Cell'));
 
 let routes = [
   {
@@ -53,6 +54,10 @@ let routes = [
   {
     path: '/popup',
     component: PopupPage
+  },
+  {
+    path: '/cell',
+    component: CellPage
   }
 ];
 

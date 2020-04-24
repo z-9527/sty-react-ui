@@ -6,7 +6,7 @@ module.exports = [
       'plus',
       'cross',
       'fail',
-      'arrow',
+      'arrow-right',
       'arrow-left',
       'arrow-up',
       'arrow-down'

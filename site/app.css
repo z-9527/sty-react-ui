@@ -81,3 +81,7 @@ body {
   height: 100vh;
   background-color: #f7f8fa;
 }
+
+.m-t32{
+  margin-top: 32px;
+}
