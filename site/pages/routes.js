@@ -10,6 +10,7 @@ const IndexListPage = asyncComponent(() => import('./IndexList'));
 const NavBarPage = asyncComponent(() => import('./NavBar'));
 const TimeLinePage = asyncComponent(() => import('./TimeLine'));
 const TreeSelectPage = asyncComponent(() => import('./TreeSelect'));
+const PopupPage = asyncComponent(() => import('./Popup'));
 
 let routes = [
   {
@@ -48,6 +49,10 @@ let routes = [
   {
     path: '/tree-select',
     component: TreeSelectPage
+  },
+  {
+    path: '/popup',
+    component: PopupPage
   }
 ];
 
