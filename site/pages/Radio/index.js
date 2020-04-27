@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import renderHeader from '../renderHeader';
 import Radio from '@components/radio';
-import Cell from '@components/cell';
 import './index.less';
 
 const RadioGroup = Radio.RadioGroup;
@@ -15,7 +14,7 @@ const data = [
 @renderHeader('Radio')
 class RadioPage extends Component {
   state = {
-    value: undefined
+    value: 'apple'
   }
 
   onChange = (value) => {
@@ -42,24 +41,24 @@ class RadioPage extends Component {
           {data.map(item => (<Radio disabled value={item.value} key={item.value}>{item.label}</Radio>))}
         </RadioGroup>
 
-        <div className='section-title-pl'>自定义形状</div>
-        <RadioGroup className='demo-group' defaultValue='apple' direction='horizontal' shape='square'>
+        <div className='section-title-pl'>自定义颜色</div>
+        <RadioGroup color='rgb(7, 193, 96)' className='demo-group' defaultValue='apple' direction='horizontal'>
           {data.map(item => (<Radio value={item.value} key={item.value}>{item.label}</Radio>))}
         </RadioGroup>
 
-        {/* <div className='section-title-pl'>配合cell使用</div>
-        <RadioGroup defaultValue='apple'>
-          {data.map(item => (
-            <Cell title={item.label} key={item.value}>
-              <Radio value={item.value}></Radio>
-            </Cell>
-          ))}
-        </RadioGroup> */}
+        <div className='section-title-pl'>自定义形状</div>
+        <RadioGroup value={this.state.value} onChange={this.onChange} className='demo-group' defaultValue='apple' direction='horizontal' shape='square'>
+          {data.map(item => (<Radio value={item.value} key={item.value}>{item.label}</Radio>))}
+        </RadioGroup>
+
+        <div className='section-title-pl m-t32'>配合cell使用</div>
+        <RadioGroup value={this.state.value} onChange={this.onChange} cell className='demo-group' defaultValue='apple'>
+          {data.map(item => (<Radio value={item.value} key={item.value}>{item.label}</Radio>))}
+        </RadioGroup>
 
       </div>
     );
   }
 }
 
-export default RadioPage
-;
+export default RadioPage;

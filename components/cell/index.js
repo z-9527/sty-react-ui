@@ -18,8 +18,6 @@ class Cell extends Component {
 
   static defaultProps = {
     prefixCls: 'sty-cell',
-    title: '',
-    label: '',
     clickable: false,
     arrow: 'none',
     center: false,
@@ -29,7 +27,7 @@ class Cell extends Component {
   state = {}
   render() {
     const {
-      prefixCls, className, title, label, children, clickable, arrow,
+      prefixCls, className, title, label, children, clickable, arrow, style, onClick = () => { },
       center, ripple, ...other
     } = this.props;
     const cls = {
@@ -41,14 +39,25 @@ class Cell extends Component {
     return (
       <div
         className={classnames(cls)}
-        {...other}
+        style={style}
+        onClick={onClick}
+      // {...other}
       >
         <div className={`${prefixCls}-title`}>
           <div>{title}</div>
-          <div className={`${prefixCls}-label`}>{label}</div>
+          {label !== undefined && <div className={`${prefixCls}-label`}>{label}</div>}
         </div>
         <div className={`${prefixCls}-value`}>
-          {children}
+          {React.Children.map(children, child => {
+            if (typeof child.type === 'function') {
+              return React.cloneElement(child, {
+                ...child.props,
+                ...other
+              });
+            }
+            return child;
+          })}
+
         </div>
         {arrow !== 'none' && <Icon className='arrow-icon' type={`arrow-${arrow}`} />}
         {ripple && <Ripple className={`${prefixCls}-ripple`} />}
