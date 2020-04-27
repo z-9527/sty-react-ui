@@ -19,6 +19,7 @@ class Home extends Component {
           <li><Link to='/cell'>CellPage</Link></li>
           <li><Link to='/switch'>SwitchPage</Link></li>
           <li><Link to='/radio'>radio</Link></li>
+          <li><Link to='/checkbox'>checkbox</Link></li>
         </ul>
       </div>
     );

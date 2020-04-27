@@ -51,7 +51,7 @@ class RadioPage extends Component {
           {data.map(item => (<Radio value={item.value} key={item.value}>{item.label}</Radio>))}
         </RadioGroup>
 
-        <div className='section-title-pl m-t32'>配合cell使用</div>
+        <div className='section-title-pl m-t32'>cell模式</div>
         <RadioGroup value={this.state.value} onChange={this.onChange} cell className='demo-group' defaultValue='apple'>
           {data.map(item => (<Radio value={item.value} key={item.value}>{item.label}</Radio>))}
         </RadioGroup>
