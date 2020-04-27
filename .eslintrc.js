@@ -26,8 +26,9 @@ module.exports = {
     semi: ["error", "always"],  //语句必须用;
     "space-before-function-paren": 0,
     "no-unused-vars": 1,
-    "react/prop-types": [1, { ignore: ['className', 'style', 'children'] }], //定义是否检测propTypes
+    "react/prop-types": [0, { ignore: ['className', 'style', 'children'] }], //定义是否检测propTypes
     "no-return-assign": 0,
-    "react/display-name": 0
+    "react/display-name": 0,
+    eqeqeq: 0
   }
 }

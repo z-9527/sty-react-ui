@@ -18,6 +18,7 @@ class Home extends Component {
           <li><Link to='/popup'>PopupPage</Link></li>
           <li><Link to='/cell'>CellPage</Link></li>
           <li><Link to='/switch'>SwitchPage</Link></li>
+          <li><Link to='/radio'>radio</Link></li>
         </ul>
       </div>
     );

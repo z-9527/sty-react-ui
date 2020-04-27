@@ -13,6 +13,7 @@ const TreeSelectPage = asyncComponent(() => import('./TreeSelect'));
 const PopupPage = asyncComponent(() => import('./Popup'));
 const CellPage = asyncComponent(() => import('./Cell'));
 const SwitchPage = asyncComponent(() => import('./Switch'));
+const RadioPage = asyncComponent(() => import('./Radio'));
 
 let routes = [
   {
@@ -63,6 +64,10 @@ let routes = [
   {
     path: '/switch',
     component: SwitchPage
+  },
+  {
+    path: '/radio',
+    component: RadioPage
   }
 ];
 
