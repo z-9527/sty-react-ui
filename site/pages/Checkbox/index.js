@@ -49,8 +49,8 @@ class CheckboxPage extends Component {
           {data.map(item => (<Checkbox value={item.value} key={item.value}>{item.label}</Checkbox>))}
         </CheckboxGroup>
 
-        <div className='section-title-pl'>cell和受控</div>
-        <CheckboxGroup value={this.state.value} onChange={this.onChange} cell className='demo-group' defaultValue={['apple']}>
+        <div className='section-title-pl m-t32'>cell和受控</div>
+        <CheckboxGroup value={this.state.value} onChange={this.onChange} cell defaultValue={['apple']}>
           {data.map(item => (<Checkbox disabled={item.value === 'banana'} value={item.value} key={item.value}>{item.label}</Checkbox>))}
         </CheckboxGroup>
       </div>

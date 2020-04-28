@@ -57,7 +57,7 @@ class Radio extends Component {
 
     if (cell) {
       return (
-        <Cell className={classnames({ [prefixCls]: true, [`${prefixCls}-disabled`]: disabled })} center title={children} onClick={() => this.onCellClick(value)}>
+        <Cell className={classnames(prefixCls, `${prefixCls}-cell`, { [`${prefixCls}-disabled`]: disabled })} center title={children} onClick={() => this.onCellClick(value)}>
           {icon}
         </Cell>
       );

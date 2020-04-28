@@ -52,9 +52,7 @@ class TreeSelect extends Component {
   }
 
   onItemClick = (item) => {
-    this.props.onItemClick(item);
-    this.props.onChange(item);
-    if (item.disabled || this.props.active !== undefined) {
+    if (item.disabled) {
       return;
     }
     const { activeItems } = this.state;
@@ -72,6 +70,8 @@ class TreeSelect extends Component {
     this.setState({
       activeItems: selects
     });
+    this.props.onItemClick(item);
+    this.props.onChange(selects);
   }
 
   render() {

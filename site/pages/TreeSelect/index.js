@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import renderHeader from '../renderHeader';
 import TreeSelect from '@components/tree-select';
-import Button from '@components/button';
+import Checkbox from '@components/checkbox';
 import data from './data';
 import './index.less';
+
+const CheckboxGroup = Checkbox.CheckboxGroup;
 
 @renderHeader('TreeSelect')
 class TreeSelectPage extends Component {
@@ -11,15 +13,7 @@ class TreeSelectPage extends Component {
     active: []
   }
 
-  onChange = (item) => {
-    const { active } = this.state;
-    let selects = [...active];
-    const exist = selects.includes(item.id);
-    if (exist) {
-      selects = selects.filter(i => i !== item.id);
-    } else {
-      selects.push(item.id);
-    }
+  onChange = (selects) => {
     this.setState({
       active: selects
     });
@@ -33,9 +27,13 @@ class TreeSelectPage extends Component {
         <div className='section-title-pl sty-hairline sty-hairline--bottom'>多选模式</div>
         <TreeSelect items={data} multiple height={300}/>
         <div className='section-title-pl sty-hairline sty-hairline--bottom'>受控模式</div>
-        <TreeSelect items={data} active={this.state.active} onChange={this.onChange} height={300}/>
-        <Button inline onClick={() => this.setState({ active: [] })}>清空选中</Button>
-        等checkbox写了之后代替button
+        <TreeSelect items={data} multiple active={this.state.active} onChange={this.onChange} height={300}/>
+        <CheckboxGroup className='checkbox-demo' value={this.state.active} onChange={this.onChange}>
+          <Checkbox value='1'>杭州</Checkbox>
+          <Checkbox value='2'>温州</Checkbox>
+          <Checkbox value='3'>宁波</Checkbox>
+          <Checkbox value='4'>义务</Checkbox>
+        </CheckboxGroup>
       </div>
     );
   }
