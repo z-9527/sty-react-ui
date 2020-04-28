@@ -12,7 +12,8 @@ class Switch extends Component {
     disabled: PropTypes.bool, // 是否可选
     loading: PropTypes.bool, // 加载状态
     color: PropTypes.string, // 选中的背景色
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) // switch大小
   }
 
   static defaultProps = {
@@ -56,7 +57,7 @@ class Switch extends Component {
   render() {
     const {
       prefixCls, className, defaultChecked, disabled, checked,
-      color, loading, onChange, style = {}, ...other
+      color, loading, onChange, style = {}, size, ...other
     } = this.props;
     const { value } = this.state;
     const cls = {
@@ -68,6 +69,9 @@ class Switch extends Component {
     const sty = style;
     if (value && color) {
       sty.backgroundColor = color;
+    }
+    if (size) {
+      sty.fontSize = `${size}px`;
     }
     return (
       <label className={classnames(cls)} style={sty} {...other}>

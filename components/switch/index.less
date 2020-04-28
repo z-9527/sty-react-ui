@@ -5,9 +5,10 @@
 .@{switchPrefixCls} {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 30px;
-  border-radius: 30px;
+  width: 2em;
+  height: 1em;
+  border-radius: 1em;
+  font-size: 30px;
   background-color: #e5e5e5;
   transition: all .3s;
 
@@ -17,16 +18,16 @@
     content: '';
     top: 1.5px;
     left: 1.5px;
-    width: 57px;
-    height: 27px;
-    border-radius: 27px;
+    width: calc(2em - 3px);
+    height: calc(1em - 3px);
+    border-radius: calc(1em - 3px);
     background-color: #fff;
     transition: all .2s;
     z-index: 1;
   }
 
   &-node {
-    width: 27px;
+    width: calc(1em - 3px);
     transform: translateX(0);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, .21);
     z-index: 2;
@@ -40,7 +41,7 @@
     }
 
     .@{switchPrefixCls}-node {
-      transform: translateX(29px);
+      transform: translateX(calc(1em - 1px));
 
       .switch-loading {
         color: @base-color;
