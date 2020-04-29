@@ -5,26 +5,22 @@ import './index.less';
 
 /**
  * 实现的功能：
- * 自动轮播、无限轮播、做完了最后总结
+ * 滚动回弹、自动轮播、无限轮播、做完了最后总结
  */
 
 class Swipe extends Component {
   static propTypes = {
     prefixCls: PropTypes.string,
-    vertical: PropTypes.bool, // 是否垂直显示
     autoplay: PropTypes.bool, // 是否自动切换
     autoplayInterval: PropTypes.number, // 切换时间间隔单位毫秒
     infinite: PropTypes.bool, // 是否循环播放，开启自动播放后默认循环播放
     dots: PropTypes.bool, // 是否显示指示点
     dotStyle: PropTypes.object, // 指示点样式
-    activeIndex: PropTypes.number, // 当前活动的面板
-    defaultActive: PropTypes.number, // 初始化显示的面板
     onChange: PropTypes.func // 切换面板的回调
   }
 
   static defaultProps = {
     prefixCls: 'sty-swipe',
-    vertical: false,
     autoplay: false,
     autoplayInterval: 3000,
     infinite: false,
@@ -47,39 +43,19 @@ class Swipe extends Component {
       childrenLength: React.Children.count(this.props.children)
     });
 
-    // if (this.props.autoplay) {
-    //   this.timer = setInterval(() => {
-    //     this.nextItem();
-    //   }, this.props.autoplayInterval);
-    // }
+    if (this.props.autoplay) {
+      this.auto();
+    }
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
   }
 
-  changeItem = (direction) => {
-    const { activeIndex, width, childrenLength } = this.state;
-    let newIndex = activeIndex;
-    if (direction === 'next') {
-      newIndex = (activeIndex + 1) % childrenLength;
-    } else {
-      newIndex = (activeIndex + childrenLength - 1) % childrenLength;
-    }
-    this.setState({
-      translateX: -newIndex * width,
-      activeIndex: newIndex,
-      transitionDuration: 500
-    });
-  }
-
-  // 回到当前活动item
-  resetItem = () => {
-    const { activeIndex, width } = this.state;
-    this.setState({
-      transitionDuration: 500,
-      translateX: -activeIndex * width
-    });
+  auto = () => {
+    this.timer = setInterval(() => {
+      this.onSlideChange(true);
+    }, this.props.autoplayInterval);
   }
 
   renderItem = () => {
@@ -96,7 +72,18 @@ class Swipe extends Component {
     });
   }
 
+  renderDots = () => {
+    const { children, prefixCls, dotStyle } = this.props;
+    const { activeIndex } = this.state;
+    return React.Children.map(children, (child, index) => {
+      return <span style={dotStyle} className={classnames({ [`${prefixCls}-dot`]: true, active: index === activeIndex })}></span>;
+    });
+  }
+
   onTouchStart = (event) => {
+    if (this.props.autoplay) {
+      clearInterval(this.timer);
+    }
     event.persist && event.persist();
     const touch = event.touches[0];
     this.touch = {
@@ -118,42 +105,86 @@ class Swipe extends Component {
     const offsetX = touch.pageX - this.touch.startX; // 计算移动距离
     const percent = Math.abs(offsetX / this.state.width); // 计算移动距离百分比
     this.touch.percent = percent;
-    this.touch.direction = offsetX < 0 ? 'next' : 'pre'; // 判断当前移动方向
+    this.touch.isNext = offsetX < 0; // 判断当前移动方向
     this.setState({
       translateX: this.touch.translateX + offsetX
     });
+    const { autoplay, infinite } = this.props;
+    const { activeIndex, childrenLength, width } = this.state;
+    if (autoplay || infinite) {
+      if (activeIndex === 0 && !this.touch.isNext) {
+        this.setItemStyle(childrenLength - 1, `translateX(${-width * childrenLength}px)`);
+      }
+      if (activeIndex === childrenLength - 1 && this.touch.isNext) {
+        this.setItemStyle(0, `translateX(${width * childrenLength}px)`);
+      }
+    }
   }, 10)
 
   onTouchEnd = () => {
-    const { percent, direction } = this.touch;
-    const { activeIndex, childrenLength } = this.state;
-    const { autoplay, infinite } = this.props;
+    const { percent, isNext } = this.touch;
     // 移动距离百分比小于0.25时回到原位
     if (percent <= 0.25) {
       this.resetItem();
     } else {
-      if (direction === 'next') {
-        // 当不是无限滚动或自动播放时，最后一个有回弹效果
-        if (activeIndex === childrenLength - 1 && !autoplay && !infinite) {
-          this.resetItem();
-        } else {
-          this.changeItem(direction);
-        }
-      } else {
-        if (activeIndex === 0 && !autoplay && !infinite) {
-          this.resetItem();
-        } else {
-          this.changeItem(direction);
-        }
-      }
+      this.onSlideChange(isNext);
+    }
+    if (this.props.autoplay) {
+      this.auto();
     }
     this.touch = null;
   }
 
+  setItemStyle = (index, transform) => {
+    const { prefixCls } = this.props;
+    const activeDOM = this.swipe.querySelectorAll(`.${prefixCls}-item`)[index];
+    activeDOM.style.transform = transform;
+  }
+
+  onSlideChange = (isNext) => {
+    clearTimeout(this.slideTime);
+    const { activeIndex, width, childrenLength } = this.state;
+    const { autoplay, infinite } = this.props;
+    let newIndex = isNext ? activeIndex + 1 : activeIndex - 1;
+    console.log('newIndex: ', newIndex);
+    const translateX = -newIndex * width;
+    // 当第最后一个元素还在向后切换时,将第一个元素位置放置到最最后面,在动画结束后再将位置还原，完成一个循环
+    if (newIndex === childrenLength || newIndex === -1) {
+      if (!autoplay && !infinite) {
+        return this.resetItem(); // 回弹
+      } else {
+        newIndex = isNext ? 0 : childrenLength - 1;
+        this.setItemStyle(newIndex, `translateX(${isNext ? '' : '-'}${width * childrenLength}px)`);
+        this.slideTime = setTimeout(() => {
+          this.setState({
+            translateX: -width * newIndex,
+            transitionDuration: 0
+          });
+          this.setItemStyle(newIndex, 'none');
+        }, 500);
+      }
+    }
+    this.props.onChange(newIndex);
+    this.setState({
+      translateX,
+      activeIndex: newIndex,
+      transitionDuration: 500
+    });
+  }
+
+  // 回到当前活动item
+  resetItem = () => {
+    const { activeIndex, width } = this.state;
+    this.setState({
+      transitionDuration: 500,
+      translateX: -activeIndex * width
+    });
+  }
+
   render() {
     const {
-      prefixCls, className, vertical, autoplay, autoplayInterval, infinite, onChange,
-      activeIndex, defaultActive, children, dots, dotStyle, style, ...other
+      prefixCls, className, autoplay, autoplayInterval, infinite, onChange,
+      children, dots, dotStyle, style, ...other
     } = this.props;
     const { translateX, transitionDuration } = this.state;
     const sty = {
@@ -176,6 +207,11 @@ class Swipe extends Component {
         >
           {this.renderItem()}
         </div>
+        {dots && (
+          <div className={`${prefixCls}-dots-box`}>
+            {this.renderDots()}
+          </div>
+        )}
       </div>
     );
   }

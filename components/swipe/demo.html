@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 200px;
+      height: 100px;
+      overflow: hidden;
+    }
+
+    .wrap {
+      display: flex;
+      width: 200px;
+      height: 100px;
+
+    }
+
+    .box {
+      flex-shrink: 0;
+      width: 200px;
+      height: 100px;
+    }
+
+    .box:nth-of-type(odd) {
+      background-color: skyblue;
+    }
+
+    .box:nth-of-type(even) {
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="wrap">
+      <div class="box">b</div>
+
+      <div class="box">a</div>
+      <div class="box">b</div>
+
+      <div class="box">a</div>
+    </div>
+  </div>
+  <button id="next" onclick="nextItem()">next</button>
+
+
+  <script>
+    /**
+     * 这种无限轮播的原理就是在首尾多加一个元素
+     * 当滑动到最后一个a元素时，在动画结束后迅速设置位置为前面的a元素，注意这里要设置过渡时间为0，用户就感知不到其实
+     * 已经完成一个循环了。
+     * 还有一种方式是不用添加元素，在最后一个元素往后切换时，将第一个元素的位置迅速放置在最后一个位置去。
+     **/
+    let index = 0
+    const wrap = document.getElementsByClassName('wrap')[0]
+    function nextItem() {
+      const newIdex = (index + 1) % 4
+      index = newIdex
+      console.log(newIdex)
+      wrap.style.transform = `translateX(-${newIdex * 200}px)`
+      wrap.style.transitionDuration = '.5s';
+      if (newIdex === 3) {
+        setTimeout(() => {
+          wrap.style.transform = `translateX(-${200}px)`
+          wrap.style.transitionDuration = '0s';
+          index = 1
+        }, 500)
+      }
+
+    }
+
+  </script>
+
+</body>
+
+</html>

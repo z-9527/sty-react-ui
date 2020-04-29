@@ -9,7 +9,7 @@ class SwipePage extends Component {
   render() {
     return (
       <div className='swipe-demo demo-box'>
-        <Swipe className='swipe'>
+        <Swipe infinite className='swipe'>
           {data.map((item, index) => {
             return (
               <Swipe.Item key={index} style={{ backgroundColor: index % 2 ? '#39a9ed' : '#66c6f2' }}>
