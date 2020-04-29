@@ -15,6 +15,7 @@ const CellPage = asyncComponent(() => import('./Cell'));
 const SwitchPage = asyncComponent(() => import('./Switch'));
 const RadioPage = asyncComponent(() => import('./Radio'));
 const CheckboxPage = asyncComponent(() => import('./Checkbox'));
+const SwipePage = asyncComponent(() => import('./Swipe'));
 
 let routes = [
   {
@@ -73,6 +74,10 @@ let routes = [
   {
     path: '/checkbox',
     component: CheckboxPage
+  },
+  {
+    path: '/swipe',
+    component: SwipePage
   }
 ];
 

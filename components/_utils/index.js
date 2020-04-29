@@ -41,7 +41,8 @@ export function classnames(...arg) {
   return classes.join(' ');
 }
 
-export function throttle(func, interval = 200) {
+// 简易的防抖函数
+export function throttle(func, interval = 100) {
   let timeout;
   let startTime = new Date();
   return function (event) {

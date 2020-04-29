@@ -1,0 +1,30 @@
+@import '../style/default.less';
+
+@swipePrefixCls: sty-swipe;
+
+.@{swipePrefixCls}-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  .@{swipePrefixCls} {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    &-item {
+      flex-shrink: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+
+
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
