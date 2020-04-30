@@ -111,7 +111,7 @@ class Swipe extends Component {
     });
     const { autoplay, infinite } = this.props;
     const { activeIndex, childrenLength, width } = this.state;
-    if (autoplay || infinite) {
+    if ((autoplay || infinite) && childrenLength !== 1) {
       if (activeIndex === 0 && !this.touch.isNext) {
         this.setItemStyle(childrenLength - 1, `translateX(${-width * childrenLength}px)`);
       }
@@ -146,11 +146,10 @@ class Swipe extends Component {
     const { activeIndex, width, childrenLength } = this.state;
     const { autoplay, infinite } = this.props;
     let newIndex = isNext ? activeIndex + 1 : activeIndex - 1;
-    console.log('newIndex: ', newIndex);
     const translateX = -newIndex * width;
     // 当第最后一个元素还在向后切换时,将第一个元素位置放置到最最后面,在动画结束后再将位置还原，完成一个循环
     if (newIndex === childrenLength || newIndex === -1) {
-      if (!autoplay && !infinite) {
+      if ((!autoplay && !infinite) || childrenLength === 1) {
         return this.resetItem(); // 回弹
       } else {
         newIndex = isNext ? 0 : childrenLength - 1;
