@@ -36,7 +36,7 @@ class ToastPage extends Component {
 
         <div className='section-title'>成功失败</div>
         <Button inline type='primary' onClick={() => this.showToast(configs[3])}>成功提示</Button>
-        <Button inline onClick={() => this.showToast(configs[4])}>失败提示</Button>
+        <Button inline type='warning' onClick={() => this.showToast(configs[4])}>失败提示</Button>
 
         <div className='section-title'>自定义图标</div>
         <Button inline onClick={() => this.showToast(configs[5])}>自定义图标</Button>
