@@ -21,6 +21,7 @@ class Home extends Component {
           <li><Link to='/radio'>radio</Link></li>
           <li><Link to='/checkbox'>checkbox</Link></li>
           <li><Link to='/swipe'>SwipePage</Link></li>
+          <li><Link to='/toast'>ToastPage</Link></li>
         </ul>
       </div>
     );
