@@ -22,6 +22,7 @@ class Home extends Component {
           <li><Link to='/checkbox'>checkbox</Link></li>
           <li><Link to='/swipe'>SwipePage</Link></li>
           <li><Link to='/toast'>ToastPage</Link></li>
+          <li><Link to='/action-sheet'>action-sheet</Link></li>
         </ul>
       </div>
     );

@@ -32,7 +32,7 @@ class Button extends Component {
   render() {
     const {
       className, type, prefixCls, disabled, ripple, round,
-      children, icon, inline, loading, ...other
+      children, icon, inline, loading, onClick = () => {}, ...other
     } = this.props;
     const cls = {
       [prefixCls]: true,
@@ -45,7 +45,16 @@ class Button extends Component {
 
     const iconEl = loading ? <Loading size={24} className={`${prefixCls}-loading`} /> : icon;
     return (
-      <div className={classnames(cls)} {...other}>
+      <div
+        className={classnames(cls)}
+        onClick={(event) => {
+          if (loading || disabled) {
+            return;
+          }
+          onClick(event);
+        }}
+        {...other}
+      >
         {!disabled && !loading && ripple && <Ripple className={`${prefixCls}-ripple`} />}
         {typeof iconEl === 'string' ? <Icon className={`${prefixCls}-icon`} type={icon} /> : iconEl}
         {children && <span className={`${prefixCls}-text`}>{children}</span>}

@@ -17,6 +17,7 @@ const RadioPage = asyncComponent(() => import('./Radio'));
 const CheckboxPage = asyncComponent(() => import('./Checkbox'));
 const SwipePage = asyncComponent(() => import('./Swipe'));
 const ToastPage = asyncComponent(() => import('./Toast'));
+const ActionSheetPage = asyncComponent(() => import('./ActionSheet'));
 
 let routes = [
   {
@@ -83,6 +84,10 @@ let routes = [
   {
     path: '/toast',
     component: ToastPage
+  },
+  {
+    path: '/action-sheet',
+    component: ActionSheetPage
   }
 ];
 

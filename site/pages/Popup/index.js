@@ -24,11 +24,20 @@ class PopupPage extends Component {
 
   render() {
     const { visible, position, closable, round } = this.state;
+    const isVertical = ['top', 'bottom'].includes(position);
+    const style = {};
+    if (isVertical) {
+      style.height = '30vh';
+    } else {
+      style.width = '30vw';
+    }
+
     return (
       <div className='popup-demo demo-box'>
         <div className='section-title-pl'>基本用法</div>
         <Cell title='展示弹出层' arrow='right' onClick={() => this.onSetValue('visible', true)} />
         <Popup
+          style={style}
           position={position}
           closable={closable}
           round={round}
@@ -42,6 +51,7 @@ class PopupPage extends Component {
           <Radio value='bottom'>底部弹出</Radio>
           <Radio value='left'>左侧弹出</Radio>
           <Radio value='right'>右侧弹出</Radio>
+          <Radio value='center'>中间弹出</Radio>
         </RadioGroup>
 
         <div className='section-title-pl'>其它设置</div>
