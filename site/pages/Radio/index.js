@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import renderHeader from '../renderHeader';
-import Radio from '@components/radio';
+import { Radio } from '@components';
 import './index.less';
 
 const RadioGroup = Radio.RadioGroup;

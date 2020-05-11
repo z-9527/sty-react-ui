@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from '@components/button';
+import { Button } from '@components';
 import renderHeader from '../renderHeader';
 import './index.less';
 

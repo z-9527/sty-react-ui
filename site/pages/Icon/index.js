@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Tabs from '@components/tabs';
-import Icon from '@components/icon';
+import { Tabs, Icon } from '@components';
 import data from './data';
 import renderHeader from '../renderHeader';
 import './index.less';

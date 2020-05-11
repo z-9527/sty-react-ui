@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Popup from '@components/popup';
-import Cell from '@components/cell';
-import Radio from '@components/radio';
-import Switch from '@components/switch';
+import { Popup, Cell, Radio, Switch } from '@components';
 import renderHeader from '../renderHeader';
 
 const RadioGroup = Radio.RadioGroup;

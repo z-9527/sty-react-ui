@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import renderHeader from '../renderHeader';
-import Cell from '@components/cell';
+import { Cell } from '@components';
 
 @renderHeader('Cell')
 class CellPage extends Component {

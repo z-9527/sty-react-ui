@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Button from '@components/button';
-import Toast from '@components/toast';
+import { Button, Toast } from '@components';
 import renderHeader from '../renderHeader';
 import './index.less';
 

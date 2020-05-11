@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TimeLine from '@components/timeline';
+import { TimeLine } from '@components';
 import renderHeader from '../renderHeader';
 import './index.less';
 

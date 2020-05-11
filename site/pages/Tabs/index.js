@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tabs from '@components/tabs';
+import { Tabs } from '@components/index';
 import renderHeader from '../renderHeader';
 import './index.less';
 
@@ -30,12 +30,7 @@ class TabsPage extends Component {
           <TabPane title='标签5'>内容5</TabPane>
           <TabPane title='标签6'>内容6</TabPane>
         </Tabs>
-        <div className='section-title'>无动画</div>
-        <Tabs activeTab={activeTab} animated={false} onNavItemClick={this.onChange}>
-          <TabPane title='标签1'>内容1</TabPane>
-          <TabPane title='标签2'>内容2</TabPane>
-          <TabPane title='标签3'>内容3</TabPane>
-        </Tabs>
+
         <div className='section-title'>垂直样式</div>
         <Tabs activeTab={activeTab} tabBarPosition="left" style={{ height: 200 }} onNavItemClick={this.onChange}>
           <TabPane title='标签1'>内容1</TabPane>
@@ -44,6 +39,13 @@ class TabsPage extends Component {
           <TabPane title='标签4'>内容4</TabPane>
           <TabPane title='标签5'>内容5</TabPane>
           <TabPane title='标签6'>内容6</TabPane>
+        </Tabs>
+
+        <div className='section-title'>无动画</div>
+        <Tabs activeTab={activeTab} animated={false} onNavItemClick={this.onChange}>
+          <TabPane title='标签1'>内容1</TabPane>
+          <TabPane title='标签2'>内容2</TabPane>
+          <TabPane title='标签3'>内容3</TabPane>
         </Tabs>
       </div>
     );

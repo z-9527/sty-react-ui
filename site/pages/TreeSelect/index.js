@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import renderHeader from '../renderHeader';
-import TreeSelect from '@components/tree-select';
-import Checkbox from '@components/checkbox';
+import { TreeSelect, Checkbox } from '@components';
 import data from './data';
 import './index.less';
 

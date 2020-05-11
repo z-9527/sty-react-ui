@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import IndexList from '@components/index-list';
+import { IndexList } from '@components';
 import renderHeader from '../renderHeader';
 
 const { Section, Cell } = IndexList;

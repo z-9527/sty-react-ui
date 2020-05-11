@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Modal from '@components/modal';
-import Button from '@components/button';
+import { Modal, Button } from '@components';
 import renderHeader from '../renderHeader';
 
 const actions = [

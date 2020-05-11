@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ActionSheet from '@components/action-sheet';
-import Cell from '@components/cell';
+import { Cell, ActionSheet } from '@components';
 import renderHeader from '../renderHeader';
 import './index.less';
 

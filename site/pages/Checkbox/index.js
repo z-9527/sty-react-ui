@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import renderHeader from '../renderHeader';
-import Checkbox from '@components/checkbox';
+import { Checkbox } from '@components';
 import './index.less';
 
 const data = [

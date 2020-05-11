@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import renderHeader from '../renderHeader';
-import Switch from '@components/switch';
-import Cell from '@components/cell';
-// import './index.less';
+import { Switch, Cell } from '@components';
 
 @renderHeader('Switch')
 class SwitchPage extends Component {

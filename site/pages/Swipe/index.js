@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Swipe from '@components/swipe';
+import { Swipe } from '@components';
 import renderHeader from '../renderHeader';
 import './index.less';
 

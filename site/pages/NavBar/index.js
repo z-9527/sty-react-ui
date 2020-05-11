@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from '@components/nav-bar';
+import { NavBar } from '@components';
 import renderHeader from '../renderHeader';
 
 @renderHeader('NavBar')
