@@ -83,6 +83,7 @@ class Modal extends Component {
   }
 }
 
+// API调用导致没有动画，react-transition-group不能在插入dom时添加过渡
 Modal.alert = function ({ title, actions, message }) {
   const div = document.createElement('div');
   document.body.appendChild(div);
