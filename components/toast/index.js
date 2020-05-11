@@ -6,6 +6,9 @@ import Icon from '../icon';
 import Loading from '../loading';
 import './index.less';
 
+// popup通过属性visible控制不同，Toast是API调用，
+// 如何在DOM节点插入和移除的时候添加动画？进入时直接给css动画，移除时等动画结束在移除
+
 class Toast extends Component {
   static propTypes = {
     prefixCls: PropTypes.string,
@@ -100,7 +103,7 @@ function notice(config) {
   document.body.appendChild(div);
   function onClose() {
     config.onClose && config.onClose();
-    document.body.removeChild(div);
+    document.body.contains(div) && document.body.removeChild(div);
   }
   ReactDOM.render(<Toast {...config} onClose={onClose} />, div);
   return onClose;
