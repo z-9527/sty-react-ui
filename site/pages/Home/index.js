@@ -23,6 +23,7 @@ class Home extends Component {
           <li><Link to='/swipe'>SwipePage</Link></li>
           <li><Link to='/toast'>ToastPage</Link></li>
           <li><Link to='/action-sheet'>action-sheet</Link></li>
+          <li><Link to='/modal'>Modal</Link></li>
         </ul>
       </div>
     );

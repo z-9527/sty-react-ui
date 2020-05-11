@@ -18,6 +18,7 @@ const CheckboxPage = asyncComponent(() => import('./Checkbox'));
 const SwipePage = asyncComponent(() => import('./Swipe'));
 const ToastPage = asyncComponent(() => import('./Toast'));
 const ActionSheetPage = asyncComponent(() => import('./ActionSheet'));
+const ModalPage = asyncComponent(() => import('./Modal'));
 
 let routes = [
   {
@@ -88,6 +89,10 @@ let routes = [
   {
     path: '/action-sheet',
     component: ActionSheetPage
+  },
+  {
+    path: '/modal',
+    component: ModalPage
   }
 ];
 

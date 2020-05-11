@@ -103,6 +103,7 @@ function notice(config) {
   document.body.appendChild(div);
   function onClose() {
     config.onClose && config.onClose();
+    ReactDOM.unmountComponentAtNode(div);
     document.body.contains(div) && document.body.removeChild(div);
   }
   ReactDOM.render(<Toast {...config} onClose={onClose} />, div);

@@ -15,7 +15,8 @@ class Popup extends Component {
     onClose: PropTypes.func,
     round: PropTypes.bool, // 是否是圆角
     closable: PropTypes.bool, // 是否显示关闭icon
-    duration: PropTypes.number // 动画时长，单位毫秒
+    duration: PropTypes.number, // 动画时长，单位毫秒
+    transitionName: PropTypes.string// 主体过渡动画名称
 
   }
 
@@ -40,12 +41,14 @@ class Popup extends Component {
 
   state = {}
   render() {
-    const {
+    let {
       prefixCls, position, overlay, visible, overlayClosable, duration, className,
-      onClose, round, closable, children, ...other
+      onClose, round, closable, children, transitionName, ...other
     } = this.props;
     const isCenter = position === 'center';
-    const transitionName = isCenter ? 'sty-fade' : `sty-slide-${position}`;
+    if (!transitionName) {
+      transitionName = isCenter ? 'sty-fade' : `sty-slide-${position}`;
+    }
     return (
       <React.Fragment>
         {overlay && (
