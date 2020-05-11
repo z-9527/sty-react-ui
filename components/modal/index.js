@@ -33,10 +33,25 @@ class Modal extends Component {
           <Button
             className={`${prefixCls}-button`}
             key={index}
+            loading={this.state[`loading${index}`]}
+            disabled={this.state[`loading${index}`]}
             style={item.style}
             onClick={() => {
-              item.onPress && item.onPress();
-              onClose();
+              const orginPress = item.onPress || function () { };
+              const res = orginPress();
+              if (res && res.then) {
+                this.setState({
+                  [`loading${index}`]: true
+                });
+                res.then(() => {
+                  this.setState({
+                    [`loading${index}`]: false
+                  });
+                  onClose();
+                });
+              } else {
+                onClose();
+              }
             }}>
             {item.text}
           </Button>
