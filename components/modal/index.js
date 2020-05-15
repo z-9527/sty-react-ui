@@ -14,13 +14,13 @@ class Modal extends Component {
     onClose: PropTypes.func, // 关闭弹框的函数
     title: PropTypes.string, // 弹框标题
     footer: PropTypes.array // 底部按钮内容
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-modal',
     overlayClosable: false,
     footer: []
-  }
+  };
 
   renderFooter = () => {
     const { footer, prefixCls, onClose } = this.props;
@@ -28,7 +28,11 @@ class Modal extends Component {
       return null;
     }
     return (
-      <div className={`${prefixCls}-footer ${prefixCls}-footer-${footer.length > 2 ? 'v' : 'h'}`}>
+      <div
+        className={`${prefixCls}-footer ${prefixCls}-footer-${
+          footer.length > 2 ? 'v' : 'h'
+        }`}
+      >
         {footer.map((item, index) => (
           <Button
             className={`${prefixCls}-button`}
@@ -37,7 +41,7 @@ class Modal extends Component {
             disabled={this.state[`loading${index}`]}
             style={item.style}
             onClick={() => {
-              const orginPress = item.onPress || function () { };
+              const orginPress = item.onPress || function () {};
               const res = orginPress();
               if (res && res.then) {
                 this.setState({
@@ -52,19 +56,26 @@ class Modal extends Component {
               } else {
                 onClose();
               }
-            }}>
+            }}
+          >
             {item.text}
           </Button>
         ))}
       </div>
     );
-  }
+  };
 
-  state = {}
+  state = {};
   render() {
     const {
-      prefixCls, className, visible, overlayClosable, onClose, children,
-      title, ...other
+      prefixCls,
+      className,
+      visible,
+      overlayClosable,
+      onClose,
+      children,
+      title,
+      ...other
     } = this.props;
     return (
       <Popup
@@ -93,16 +104,12 @@ Modal.alert = function ({ title, actions, message }) {
       div.parentNode.removeChild(div);
     }
   }
-  ReactDOM.render((
-    <Modal
-      visible={true}
-      title={title}
-      onClose={close}
-      footer={actions}
-    >
+  ReactDOM.render(
+    <Modal visible={true} title={title} onClose={close} footer={actions}>
       {message}
-    </Modal>
-  ), div);
+    </Modal>,
+    div
+  );
   return {
     close
   };

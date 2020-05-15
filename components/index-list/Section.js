@@ -3,7 +3,7 @@ import { classnames } from '../_utils';
 import './index.less';
 
 class Section extends Component {
-  state = {}
+  state = {};
   renderChildren = () => {
     const { children, prefixCls } = this.props;
     return React.Children.map(children, item => {
@@ -12,7 +12,7 @@ class Section extends Component {
       }
       return item;
     });
-  }
+  };
 
   render() {
     // eslint-disable-next-line react/prop-types
@@ -20,7 +20,14 @@ class Section extends Component {
     const isSticky = activeIndex === index && sticky;
     return (
       <li className={`${prefixCls}-section`} data-index={index}>
-        <p className={classnames({ [`${prefixCls}-section-title`]: true, [`${prefixCls}-section-title-sticky`]: isSticky })}>{index}</p>
+        <p
+          className={classnames({
+            [`${prefixCls}-section-title`]: true,
+            [`${prefixCls}-section-title-sticky`]: isSticky
+          })}
+        >
+          {index}
+        </p>
         <ul style={{ marginTop: isSticky ? firstTitle.offsetHeight : 0 }}>
           {this.renderChildren()}
         </ul>
@@ -29,9 +36,13 @@ class Section extends Component {
   }
 }
 
-const Cell = (props) => {
+const Cell = props => {
   const { prefixCls, ...other } = props;
-  return <li className={`${prefixCls}-cell`} {...other}>{props.children}</li>;
+  return (
+    <li className={`${prefixCls}-cell`} {...other}>
+      {props.children}
+    </li>
+  );
 };
 
 Section.Cell = Cell;

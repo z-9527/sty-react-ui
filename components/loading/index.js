@@ -12,8 +12,8 @@ function LoadingIcon(type) {
     return Spin;
   }
   return (
-    <svg viewBox="25 25 50 50">
-      <circle cx="50" cy="50" r="20" fill="none" />
+    <svg viewBox='25 25 50 50'>
+      <circle cx='50' cy='50' r='20' fill='none' />
     </svg>
   );
 }
@@ -25,17 +25,26 @@ class Loading extends Component {
     size: PropTypes.number,
     color: PropTypes.string,
     vertical: PropTypes.bool // 文字是否垂直排列
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-loading',
     type: 'circular',
     vertical: false
-  }
+  };
 
-  state = {}
+  state = {};
   render() {
-    const { prefixCls, className, type, size, color, vertical, children, ...other } = this.props;
+    const {
+      prefixCls,
+      className,
+      type,
+      size,
+      color,
+      vertical,
+      children,
+      ...other
+    } = this.props;
     const cls = {
       [`${prefixCls}-spinner`]: true,
       [`${prefixCls}-type-${type}`]: type
@@ -46,7 +55,12 @@ class Loading extends Component {
       style.height = `${size}px`;
     }
     return (
-      <div className={classnames(prefixCls, className, { [`${prefixCls}-vertical`]: vertical })} {...other}>
+      <div
+        className={classnames(prefixCls, className, {
+          [`${prefixCls}-vertical`]: vertical
+        })}
+        {...other}
+      >
         <span className={classnames(cls)} style={style}>
           {LoadingIcon(type)}
         </span>

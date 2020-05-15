@@ -14,16 +14,15 @@ class Switch extends Component {
     color: PropTypes.string, // 选中的背景色
     onChange: PropTypes.func,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) // switch大小
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-switch',
     defaultChecked: false,
     disabled: false,
     loading: false,
-    onChange: () => { }
-
-  }
+    onChange: () => {}
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { checked } = nextProps;
@@ -43,21 +42,30 @@ class Switch extends Component {
 
   state = {
     value: false
-  }
+  };
 
-  onChange = (event) => {
+  onChange = event => {
     event.persist && event.persist();
     const checked = event.currentTarget.checked;
     this.props.onChange(checked);
     this.setState({
       value: checked
     });
-  }
+  };
 
   render() {
     const {
-      prefixCls, className, defaultChecked, disabled, checked,
-      color, loading, onChange, style = {}, size, ...other
+      prefixCls,
+      className,
+      defaultChecked,
+      disabled,
+      checked,
+      color,
+      loading,
+      onChange,
+      style = {},
+      size,
+      ...other
     } = this.props;
     const { value } = this.state;
     const cls = {
@@ -76,14 +84,14 @@ class Switch extends Component {
     return (
       <label className={classnames(cls)} style={sty} {...other}>
         <input
-          type="checkbox"
+          type='checkbox'
           onChange={this.onChange}
           disabled={disabled}
           checked={value}
           value={value ? 'on' : 'off'}
         />
         <div className={`${prefixCls}-node`}>
-          {loading && <Loading className="switch-loading" />}
+          {loading && <Loading className='switch-loading' />}
         </div>
       </label>
     );

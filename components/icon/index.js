@@ -8,26 +8,35 @@ class Icon extends Component {
     prefixCls: PropTypes.string,
     color: PropTypes.string, // icon颜色
     type: PropTypes.string, // 内置icon名称
-    size: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ])
-  }
+    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  };
 
   static defaultProps = {
     prefixCls: 'sty-icon'
-  }
+  };
 
-  state = {}
+  state = {};
   render() {
-    const { prefixCls, className, color, style = {}, size, type, ...other } = this.props;
+    const {
+      prefixCls,
+      className,
+      color,
+      style = {},
+      size,
+      type,
+      ...other
+    } = this.props;
     const cls = {
       [`${prefixCls}`]: true,
       [`${prefixCls}-${type}`]: type,
       [className]: className
     };
     return (
-      <i className={classnames(cls)} style={{ ...style, color, fontSize: `${size}px` }} {...other} />
+      <i
+        className={classnames(cls)}
+        style={{ ...style, color, fontSize: `${size}px` }}
+        {...other}
+      />
     );
   }
 }

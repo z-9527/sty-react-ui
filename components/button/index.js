@@ -16,7 +16,7 @@ class Button extends Component {
     icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]), // 图标
     ripple: PropTypes.bool, // 触碰是否有水波纹效果
     round: PropTypes.bool // 是否为圆形按钮
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-button',
@@ -26,13 +26,23 @@ class Button extends Component {
     loading: false,
     ripple: true,
     round: false
-  }
+  };
 
-  state = {}
+  state = {};
   render() {
     const {
-      className, type, prefixCls, disabled, ripple, round,
-      children, icon, inline, loading, onClick = () => {}, ...other
+      className,
+      type,
+      prefixCls,
+      disabled,
+      ripple,
+      round,
+      children,
+      icon,
+      inline,
+      loading,
+      onClick = () => {},
+      ...other
     } = this.props;
     const cls = {
       [prefixCls]: true,
@@ -43,11 +53,15 @@ class Button extends Component {
       [className]: className
     };
 
-    const iconEl = loading ? <Loading size={24} className={`${prefixCls}-loading`} /> : icon;
+    const iconEl = loading ? (
+      <Loading size={24} className={`${prefixCls}-loading`} />
+    ) : (
+      icon
+    );
     return (
       <div
         className={classnames(cls)}
-        onClick={(event) => {
+        onClick={event => {
           if (loading || disabled) {
             return;
           }
@@ -55,8 +69,14 @@ class Button extends Component {
         }}
         {...other}
       >
-        {!disabled && !loading && ripple && <Ripple className={`${prefixCls}-ripple`} />}
-        {typeof iconEl === 'string' ? <Icon className={`${prefixCls}-icon`} type={icon} /> : iconEl}
+        {!disabled && !loading && ripple && (
+          <Ripple className={`${prefixCls}-ripple`} />
+        )}
+        {typeof iconEl === 'string' ? (
+          <Icon className={`${prefixCls}-icon`} type={icon} />
+        ) : (
+          iconEl
+        )}
         {children && <span className={`${prefixCls}-text`}>{children}</span>}
       </div>
     );

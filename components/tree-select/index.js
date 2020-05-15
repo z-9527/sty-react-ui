@@ -14,17 +14,17 @@ class TreeSelect extends Component {
     onItemClick: PropTypes.func, // 子选项点击事件
     onChange: PropTypes.func, // 子选项切换事件
     active: PropTypes.oneOfType([PropTypes.array, PropTypes.string]) // 当前选中项
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-tree-select',
     height: 300,
     items: [],
     multiple: false,
-    onNavClick: () => { },
-    onItemClick: () => { },
-    onChange: () => { }
-  }
+    onNavClick: () => {},
+    onItemClick: () => {},
+    onChange: () => {}
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { active } = nextProps;
@@ -39,7 +39,7 @@ class TreeSelect extends Component {
   state = {
     activeNav: 0, // 当前点中的nav
     activeItems: [] // 当前选中的item
-  }
+  };
 
   onNavClick = (nav, index) => {
     if (nav.disabled) {
@@ -49,9 +49,9 @@ class TreeSelect extends Component {
     this.setState({
       activeNav: index
     });
-  }
+  };
 
-  onItemClick = (item) => {
+  onItemClick = item => {
     if (item.disabled) {
       return;
     }
@@ -72,17 +72,28 @@ class TreeSelect extends Component {
     });
     this.props.onItemClick(item);
     this.props.onChange(selects);
-  }
+  };
 
   render() {
     const {
-      prefixCls, className, items, multiple, onNavClick, height, style,
-      onItemClick, ...other
+      prefixCls,
+      className,
+      items,
+      multiple,
+      onNavClick,
+      height,
+      style,
+      onItemClick,
+      ...other
     } = this.props;
     const { activeNav, activeItems } = this.state;
 
     return (
-      <div className={classnames(prefixCls, className)} style={{ ...style, height }} {...other}>
+      <div
+        className={classnames(prefixCls, className)}
+        style={{ ...style, height }}
+        {...other}
+      >
         <div className={`${prefixCls}-sidebar`}>
           {items.map((item, index) => (
             <div
@@ -100,21 +111,25 @@ class TreeSelect extends Component {
           ))}
         </div>
         <div className={`${prefixCls}-content`}>
-          {items[activeNav] && items[activeNav].children && items[activeNav].children.map(i => (
-            <div
-              key={i.id}
-              className={classnames({
-                [`${prefixCls}-content-item`]: true,
-                ellipsis: true,
-                disabled: i.disabled,
-                active: activeItems.includes(i.id)
-              })}
-              onClick={() => this.onItemClick(i)}
-            >
-              {i.text}
-              {activeItems.includes(i.id) && <Icon className='select-icon' type='checked'/>}
-            </div>
-          ))}
+          {items[activeNav] &&
+            items[activeNav].children &&
+            items[activeNav].children.map(i => (
+              <div
+                key={i.id}
+                className={classnames({
+                  [`${prefixCls}-content-item`]: true,
+                  ellipsis: true,
+                  disabled: i.disabled,
+                  active: activeItems.includes(i.id)
+                })}
+                onClick={() => this.onItemClick(i)}
+              >
+                {i.text}
+                {activeItems.includes(i.id) && (
+                  <Icon className='select-icon' type='checked' />
+                )}
+              </div>
+            ))}
         </div>
       </div>
     );

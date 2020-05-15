@@ -5,21 +5,21 @@ import './index.less';
 
 @renderHeader('Loading')
 class LoadingPage extends Component {
-  state = {}
+  state = {};
   render() {
     return (
-      <div className="loading-demo demo-box">
+      <div className='loading-demo demo-box'>
         <div className='section-title'>加载类型</div>
         <Loading />
-        <Loading type="spinner" />
+        <Loading type='spinner' />
 
         <div className='section-title'>自定义颜色</div>
-        <Loading color='#80D0C7'/>
-        <Loading color='#80D0C7' type="spinner" />
+        <Loading color='#80D0C7' />
+        <Loading color='#80D0C7' type='spinner' />
 
         <div className='section-title'>自定义大小</div>
-        <Loading size={24}/>
-        <Loading size={24} type="spinner" />
+        <Loading size={24} />
+        <Loading size={24} type='spinner' />
 
         <div className='section-title'>加载文案</div>
         <Loading>加载中...</Loading>

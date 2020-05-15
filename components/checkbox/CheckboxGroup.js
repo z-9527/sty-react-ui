@@ -12,20 +12,20 @@ class CheckboxGroup extends Component {
     value: PropTypes.array, // 当前选中值
     defaultValue: PropTypes.array, // 默认选中值
     onChange: PropTypes.func, // 选项变化的函数
-    cell: PropTypes.bool// 是否配合cell使用
-  }
+    cell: PropTypes.bool // 是否配合cell使用
+  };
 
   static defaultProps = {
     prefixCls: 'sty-checkbox-group',
     direction: 'horizontal',
     shape: 'square',
-    onChange: () => { },
+    onChange: () => {},
     cell: false
-  }
+  };
 
   state = {
     value: []
-  }
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { value } = nextProps;
@@ -43,12 +43,12 @@ class CheckboxGroup extends Component {
     });
   }
 
-  onChange = (value) => {
+  onChange = value => {
     this.props.onChange(value);
     this.setState({
       value
     });
-  }
+  };
 
   renderItem = () => {
     const { children, shape, color, cell } = this.props;
@@ -68,12 +68,21 @@ class CheckboxGroup extends Component {
 
       return child;
     });
-  }
+  };
 
   render() {
     let {
-      prefixCls, direction, shape, color, value, defaultValue,
-      onChange, children, className, cell, ...other
+      prefixCls,
+      direction,
+      shape,
+      color,
+      value,
+      defaultValue,
+      onChange,
+      children,
+      className,
+      cell,
+      ...other
     } = this.props;
 
     direction = cell ? 'vertical' : direction;

@@ -4,7 +4,52 @@ import renderHeader from '../renderHeader';
 
 const { Section, Cell } = IndexList;
 
-const NAMES = ['Aaron', 'Alden', 'Austin', 'Baldwin', 'Braden', 'Carl', 'Chandler', 'Clyde', 'David', 'Edgar', 'Elton', 'Floyd', 'Freeman', 'Gavin', 'Hector', 'Henry', 'Ian', 'Jason', 'Joshua', 'Kane', 'Lambert', 'Matthew', 'Morgan', 'Neville', 'Oliver', 'Oscar', 'Perry', 'Quinn', 'Ramsey', 'Scott', 'Seth', 'Spencer', 'Timothy', 'Todd', 'Trevor', 'Udolf', 'Victor', 'Vincent', 'Walton', 'Willis', 'Xavier', 'Yvonne', 'Zack', 'Zane'];
+const NAMES = [
+  'Aaron',
+  'Alden',
+  'Austin',
+  'Baldwin',
+  'Braden',
+  'Carl',
+  'Chandler',
+  'Clyde',
+  'David',
+  'Edgar',
+  'Elton',
+  'Floyd',
+  'Freeman',
+  'Gavin',
+  'Hector',
+  'Henry',
+  'Ian',
+  'Jason',
+  'Joshua',
+  'Kane',
+  'Lambert',
+  'Matthew',
+  'Morgan',
+  'Neville',
+  'Oliver',
+  'Oscar',
+  'Perry',
+  'Quinn',
+  'Ramsey',
+  'Scott',
+  'Seth',
+  'Spencer',
+  'Timothy',
+  'Todd',
+  'Trevor',
+  'Udolf',
+  'Victor',
+  'Vincent',
+  'Walton',
+  'Willis',
+  'Xavier',
+  'Yvonne',
+  'Zack',
+  'Zane'
+];
 const list = [];
 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(letter => {
   const cells = NAMES.filter(i => i[0] === letter);
@@ -16,7 +61,7 @@ const list = [];
 
 @renderHeader('IndexList')
 class IndexListPage extends Component {
-  state = {}
+  state = {};
   render() {
     return (
       <div className='demo-box'>

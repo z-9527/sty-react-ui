@@ -6,20 +6,16 @@ import './index.less';
 class Test extends Component {
   static propTypes = {
     prefixCls: PropTypes.string
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-test'
-  }
+  };
 
-  state = {}
+  state = {};
   render() {
     const { prefixCls, className, ...other } = this.props;
-    return (
-      <div>
-
-      </div>
-    );
+    return <div></div>;
   }
 }
 

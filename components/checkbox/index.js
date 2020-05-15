@@ -19,7 +19,7 @@ class Checkbox extends Component {
     checked: PropTypes.bool, // 是否选中
     defaultChecked: PropTypes.bool, // 是否默认选中
     onCheckChange: PropTypes.func // checkboxgroup传下来的chang函数
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-checkbox',
@@ -27,13 +27,13 @@ class Checkbox extends Component {
     defaultChecked: false,
     direction: 'horizontal',
     shape: 'square',
-    onChange: () => { },
-    onCheckChange: () => { }
-  }
+    onChange: () => {},
+    onCheckChange: () => {}
+  };
 
   state = {
     checked: false
-  }
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { checked } = nextProps;
@@ -71,19 +71,31 @@ class Checkbox extends Component {
       });
       this.props.onChange(checked);
     }
-  }
+  };
 
-  onInputChange = (event) => {
+  onInputChange = event => {
     event.persist && event.persist();
     const value = event.currentTarget.value;
     const checked = event.currentTarget.checked;
     this.onValueChange(value, checked);
-  }
+  };
 
   render() {
     const {
-      prefixCls, className, disabled, value, selectValue, checked, defaultChecked,
-      cell, shape, color, children, onChange, onCheckChange, ...other
+      prefixCls,
+      className,
+      disabled,
+      value,
+      selectValue,
+      checked,
+      defaultChecked,
+      cell,
+      shape,
+      color,
+      children,
+      onChange,
+      onCheckChange,
+      ...other
     } = this.props;
     let isCheck = this.state.checked;
     if (selectValue) {
@@ -98,17 +110,27 @@ class Checkbox extends Component {
           [`${prefixCls}-icon-checked`]: isCheck
         })}
       >
-        <Icon type='success' style={isCheck && color ? { backgroundColor: color, borderColor: color } : {}} />
+        <Icon
+          type='success'
+          style={
+            isCheck && color
+              ? { backgroundColor: color, borderColor: color }
+              : {}
+          }
+        />
       </div>
     );
 
     if (cell) {
       return (
         <Cell
-          className={classnames(prefixCls, `${prefixCls}-cell`, { [`${prefixCls}-disabled`]: disabled })}
+          className={classnames(prefixCls, `${prefixCls}-cell`, {
+            [`${prefixCls}-disabled`]: disabled
+          })}
           center
           title={children}
-          onClick={() => this.onValueChange(value, !isCheck)}>
+          onClick={() => this.onValueChange(value, !isCheck)}
+        >
           {icon}
         </Cell>
       );

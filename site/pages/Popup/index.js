@@ -11,13 +11,13 @@ class PopupPage extends Component {
     position: 'bottom',
     closable: false,
     round: false
-  }
+  };
 
   onSetValue = (key, value) => {
     this.setState({
       [key]: value
     });
-  }
+  };
 
   render() {
     const { visible, position, closable, round } = this.state;
@@ -32,7 +32,11 @@ class PopupPage extends Component {
     return (
       <div className='popup-demo demo-box'>
         <div className='section-title-pl'>基本用法</div>
-        <Cell title='展示弹出层' arrow='right' onClick={() => this.onSetValue('visible', true)} />
+        <Cell
+          title='展示弹出层'
+          arrow='right'
+          onClick={() => this.onSetValue('visible', true)}
+        />
         <Popup
           style={style}
           position={position}
@@ -40,10 +44,13 @@ class PopupPage extends Component {
           round={round}
           visible={visible}
           onClose={() => this.onSetValue('visible', false)}
-        >
-        </Popup>
+        ></Popup>
         <div className='section-title-pl'>弹出层位置</div>
-        <RadioGroup cell value={position} onChange={(position) => this.onSetValue('position', position)}>
+        <RadioGroup
+          cell
+          value={position}
+          onChange={position => this.onSetValue('position', position)}
+        >
           <Radio value='top'>顶部弹出</Radio>
           <Radio value='bottom'>底部弹出</Radio>
           <Radio value='left'>左侧弹出</Radio>
@@ -53,10 +60,16 @@ class PopupPage extends Component {
 
         <div className='section-title-pl'>其它设置</div>
         <Cell title='显示关闭图标'>
-          <Switch checked={closable} onChange={(checked) => this.onSetValue('closable', checked)} />
+          <Switch
+            checked={closable}
+            onChange={checked => this.onSetValue('closable', checked)}
+          />
         </Cell>
         <Cell title='是否圆角'>
-          <Switch checked={round} onChange={(checked) => this.onSetValue('round', checked)} />
+          <Switch
+            checked={round}
+            onChange={checked => this.onSetValue('round', checked)}
+          />
         </Cell>
       </div>
     );

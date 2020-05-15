@@ -13,33 +13,42 @@ class Radio extends Component {
     value: PropTypes.any, // 当前radio代表的值
     shape: PropTypes.oneOf(['square', 'round']), // 默认图标形状
     color: PropTypes.string, // 选中颜色
-    cell: PropTypes.bool// 是否配合cell使用
-  }
+    cell: PropTypes.bool // 是否配合cell使用
+  };
 
   static defaultProps = {
     prefixCls: 'sty-radio',
     disabled: false
-  }
+  };
 
-  state = {}
+  state = {};
 
-  onChange = (event) => {
+  onChange = event => {
     event.persist && event.persist();
     const value = event.currentTarget.value;
     this.props.onChange(value);
-  }
+  };
 
-  onCellClick = (value) => {
+  onCellClick = value => {
     if (this.props.disabled) {
       return;
     }
     this.props.onChange(value);
-  }
+  };
 
   render() {
     const {
-      prefixCls, className, disabled, value, selectValue,
-      shape, color, children, onChange, cell, ...other
+      prefixCls,
+      className,
+      disabled,
+      value,
+      selectValue,
+      shape,
+      color,
+      children,
+      onChange,
+      cell,
+      ...other
     } = this.props;
     const checked = selectValue == value;
 
@@ -51,20 +60,40 @@ class Radio extends Component {
           [`${prefixCls}-icon-checked`]: checked
         })}
       >
-        <Icon type='success' style={checked && color ? { backgroundColor: color, borderColor: color } : {}} />
+        <Icon
+          type='success'
+          style={
+            checked && color
+              ? { backgroundColor: color, borderColor: color }
+              : {}
+          }
+        />
       </div>
     );
 
     if (cell) {
       return (
-        <Cell className={classnames(prefixCls, `${prefixCls}-cell`, { [`${prefixCls}-disabled`]: disabled })} center title={children} onClick={() => this.onCellClick(value)}>
+        <Cell
+          className={classnames(prefixCls, `${prefixCls}-cell`, {
+            [`${prefixCls}-disabled`]: disabled
+          })}
+          center
+          title={children}
+          onClick={() => this.onCellClick(value)}
+        >
           {icon}
         </Cell>
       );
     }
 
     return (
-      <label className={classnames({ [prefixCls]: true, [`${prefixCls}-disabled`]: disabled })} {...other}>
+      <label
+        className={classnames({
+          [prefixCls]: true,
+          [`${prefixCls}-disabled`]: disabled
+        })}
+        {...other}
+      >
         <input
           type='radio'
           disabled={disabled}

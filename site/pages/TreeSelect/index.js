@@ -10,24 +10,40 @@ const CheckboxGroup = Checkbox.CheckboxGroup;
 class TreeSelectPage extends Component {
   state = {
     active: []
-  }
+  };
 
-  onChange = (selects) => {
+  onChange = selects => {
     this.setState({
       active: selects
     });
-  }
+  };
 
   render() {
     return (
       <div className='tree-select-demo demo-box'>
-        <div className='section-title-pl sty-hairline sty-hairline--bottom'>单选模式</div>
-        <TreeSelect items={data} height={300}/>
-        <div className='section-title-pl sty-hairline sty-hairline--bottom'>多选模式</div>
-        <TreeSelect items={data} multiple height={300}/>
-        <div className='section-title-pl sty-hairline sty-hairline--bottom'>受控模式</div>
-        <TreeSelect items={data} multiple active={this.state.active} onChange={this.onChange} height={300}/>
-        <CheckboxGroup className='checkbox-demo' value={this.state.active} onChange={this.onChange}>
+        <div className='section-title-pl sty-hairline sty-hairline--bottom'>
+          单选模式
+        </div>
+        <TreeSelect items={data} height={300} />
+        <div className='section-title-pl sty-hairline sty-hairline--bottom'>
+          多选模式
+        </div>
+        <TreeSelect items={data} multiple height={300} />
+        <div className='section-title-pl sty-hairline sty-hairline--bottom'>
+          受控模式
+        </div>
+        <TreeSelect
+          items={data}
+          multiple
+          active={this.state.active}
+          onChange={this.onChange}
+          height={300}
+        />
+        <CheckboxGroup
+          className='checkbox-demo'
+          value={this.state.active}
+          onChange={this.onChange}
+        >
           <Checkbox value='1'>杭州</Checkbox>
           <Checkbox value='2'>温州</Checkbox>
           <Checkbox value='3'>宁波</Checkbox>

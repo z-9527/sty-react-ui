@@ -15,56 +15,73 @@ class Tabs extends Component {
     tabBarInactiveTextColor: PropTypes.string, // 非激活文字颜色
     tabBarPosition: PropTypes.oneOf(['right', 'left', 'top', 'bottom']),
     animated: PropTypes.bool // 是否开启切换动画
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-tabs',
     initIndex: 0,
-    onChange: () => { },
-    onNavItemClick: () => { },
+    onChange: () => {},
+    onNavItemClick: () => {},
     tabBarPosition: 'top',
     animated: true
-  }
+  };
 
   state = {
     activeIndex: 0,
     isVertical: false,
     tabBarHeight: 50 // tabBar高度，vertical布局需要知道
-  }
+  };
 
   componentDidMount() {
     this.initPostion();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.activeTab !== undefined && this.props.activeTab !== prevProps.activeTab) {
+    if (
+      this.props.activeTab !== undefined &&
+      this.props.activeTab !== prevProps.activeTab
+    ) {
       this.goToTab(this.props.activeTab);
     }
   }
 
   initPostion = () => {
     const isVertical = ['right', 'left'].includes(this.props.tabBarPosition);
-    this.setState({
-      isVertical,
-      tabBarHeight: this.tabBar.offsetHeight
-    }, () => {
-      this.goToTab(this.props.activeTab || this.props.initIndex);
-    });
-  }
+    this.setState(
+      {
+        isVertical,
+        tabBarHeight: this.tabBar.offsetHeight
+      },
+      () => {
+        this.goToTab(this.props.activeTab || this.props.initIndex);
+      }
+    );
+  };
 
   renderContent = () => {
     const { prefixCls, tabBarPosition, children } = this.props;
     const { activeIndex } = this.state;
     return React.Children.map(children, (item, index) => {
       if (item.type === TabPane) {
-        return React.cloneElement(item, { ...item.props, prefixCls, activeIndex, index, tabBarPosition });
+        return React.cloneElement(item, {
+          ...item.props,
+          prefixCls,
+          activeIndex,
+          index,
+          tabBarPosition
+        });
       }
       return null;
     });
-  }
+  };
 
   renderTabBar = () => {
-    const { children, prefixCls, tabBarActiveTextColor, tabBarInactiveTextColor } = this.props;
+    const {
+      children,
+      prefixCls,
+      tabBarActiveTextColor,
+      tabBarInactiveTextColor
+    } = this.props;
     const { activeIndex } = this.state;
     return React.Children.map(children, (item, index) => {
       const cls = {
@@ -72,11 +89,18 @@ class Tabs extends Component {
         [`${prefixCls}-bar-tab-active`]: activeIndex === index
       };
       const style = {
-        color: activeIndex === index ? tabBarActiveTextColor : tabBarInactiveTextColor
+        color:
+          activeIndex === index
+            ? tabBarActiveTextColor
+            : tabBarInactiveTextColor
       };
       if (item.type === TabPane) {
         return (
-          <div onClick={() => this.onNavItemClick(index)} className={classnames(cls)} style={style}>
+          <div
+            onClick={() => this.onNavItemClick(index)}
+            className={classnames(cls)}
+            style={style}
+          >
             <div className={`${prefixCls}-bar-tab-title`}>
               {item.props.title}
             </div>
@@ -85,25 +109,27 @@ class Tabs extends Component {
       }
       return null;
     });
-  }
+  };
 
-  onNavItemClick = (index) => {
+  onNavItemClick = index => {
     this.props.onNavItemClick(index);
     if (this.props.activeTab !== undefined) {
       return;
     }
     this.goToTab(index);
-  }
+  };
 
   _getValidIndex = index => {
     // 防止索引超过列表长度和小于0
     const count = React.Children.count(this.props.children);
     return Math.min(count - 1, Math.max(0, index));
-  }
+  };
 
-  goToTab = (index) => {
+  goToTab = index => {
     index = this._getValidIndex(index);
-    const activeDOM = this.tabBar.querySelectorAll(`.${this.props.prefixCls}-bar-tab`)[index];
+    const activeDOM = this.tabBar.querySelectorAll(
+      `.${this.props.prefixCls}-bar-tab`
+    )[index];
 
     this.tabBarAnimate(index, activeDOM);
     this.lineAnimate(index, activeDOM);
@@ -115,16 +141,20 @@ class Tabs extends Component {
     if (index !== this.state.activeIndex) {
       this.props.onChange(index);
     }
-  }
+  };
 
-  contentAnimate = (index) => {
+  contentAnimate = index => {
     const { isVertical, tabBarHeight } = this.state;
     if (isVertical) {
-      this.tabsContent.style.transform = `translate3d(0, -${index * tabBarHeight}px, 1px)`;
+      this.tabsContent.style.transform = `translate3d(0, -${
+        index * tabBarHeight
+      }px, 1px)`;
     } else {
-      this.tabsContent.style.transform = `translate3d(-${index * 100}%, 0px, 1px)`;
+      this.tabsContent.style.transform = `translate3d(-${
+        index * 100
+      }%, 0px, 1px)`;
     }
-  }
+  };
 
   tabBarAnimate = (index, target) => {
     const count = React.Children.count(this.props.children);
@@ -135,12 +165,16 @@ class Tabs extends Component {
       const { animated } = this.props;
 
       this.tabBar.scrollTo({
-        left: isVertical ? 0 : index * offsetWidth - window.innerWidth / 2 + offsetWidth / 2,
-        top: isVertical ? index * offsetHeight - tabBarHeight / 2 + offsetHeight / 2 : 0,
+        left: isVertical
+          ? 0
+          : index * offsetWidth - window.innerWidth / 2 + offsetWidth / 2,
+        top: isVertical
+          ? index * offsetHeight - tabBarHeight / 2 + offsetHeight / 2
+          : 0,
         behavior: animated ? 'smooth' : 'instant'
       });
     }
-  }
+  };
 
   // 下划线流体动画效果，先变化长度然后再变化位置或先变化位置再变化长度
   lineAnimate = (index, target) => {
@@ -175,23 +209,53 @@ class Tabs extends Component {
       this.line.style[property] = `${size}px`;
       this.line.style[direction] = `${move}px`;
     }
-  }
+  };
 
   render() {
     const {
-      className, prefixCls, children, lineColor, tabBarActiveTextColor, onNavItemClick,
-      animated, tabBarPosition, tabBarInactiveTextColor, activeTab, initIndex, onChange, ...other
+      className,
+      prefixCls,
+      children,
+      lineColor,
+      tabBarActiveTextColor,
+      onNavItemClick,
+      animated,
+      tabBarPosition,
+      tabBarInactiveTextColor,
+      activeTab,
+      initIndex,
+      onChange,
+      ...other
     } = this.props;
 
     return (
-      <div className={classnames(`${prefixCls} ${prefixCls}-${tabBarPosition}`, className)} {...other}>
+      <div
+        className={classnames(
+          `${prefixCls} ${prefixCls}-${tabBarPosition}`,
+          className
+        )}
+        {...other}
+      >
         <div className={`${prefixCls}-tab-bar-wrapper`}>
-          <div ref={el => (this.tabBar = el)} className={`${prefixCls}-tab-bar`}>
+          <div
+            ref={el => (this.tabBar = el)}
+            className={`${prefixCls}-tab-bar`}
+          >
             {this.renderTabBar()}
-            <div ref={el => (this.line = el)} className={`${prefixCls}-line`} style={{ backgroundColor: lineColor }} />
+            <div
+              ref={el => (this.line = el)}
+              className={`${prefixCls}-line`}
+              style={{ backgroundColor: lineColor }}
+            />
           </div>
         </div>
-        <div className={classnames({ [`${prefixCls}-content`]: true, [`${prefixCls}-content-animated`]: animated })} ref={el => this.tabsContent = el}>
+        <div
+          className={classnames({
+            [`${prefixCls}-content`]: true,
+            [`${prefixCls}-content-animated`]: animated
+          })}
+          ref={el => (this.tabsContent = el)}
+        >
           {this.renderContent()}
         </div>
       </div>
@@ -199,9 +263,18 @@ class Tabs extends Component {
   }
 }
 
-const TabPane = (props) => {
+const TabPane = props => {
   // eslint-disable-next-line react/prop-types
-  const { className, prefixCls, children, activeIndex, tabBarPosition, style = {}, index, ...other } = props;
+  const {
+    className,
+    prefixCls,
+    children,
+    activeIndex,
+    tabBarPosition,
+    style = {},
+    index,
+    ...other
+  } = props;
   const sty = style;
   if (activeIndex === index) {
     sty.overflow = 'auto';
@@ -213,7 +286,8 @@ const TabPane = (props) => {
     <div
       className={classnames(`${prefixCls}-tabPane`, className)}
       style={sty}
-      {...other}>
+      {...other}
+    >
       {children}
     </div>
   );

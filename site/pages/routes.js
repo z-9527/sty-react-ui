@@ -103,7 +103,11 @@ let routes = [
 
 routes = routes.map(i => ({
   ...i,
-  component: () => <div className='page-box'><i.component /></div> // 用div将懒加载的代码包裹起来，防止路由动画不起作用
+  component: () => (
+    <div className='page-box'>
+      <i.component />
+    </div>
+  ) // 用div将懒加载的代码包裹起来，防止路由动画不起作用
 }));
 
 export default routes;

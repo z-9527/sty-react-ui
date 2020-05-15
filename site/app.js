@@ -19,18 +19,14 @@ function App() {
   return (
     <div>
       <TransitionGroup
-        childFactory={child => React.cloneElement(
-          child,
-          { classNames: ANIMATION_MAP[history.action] }
-        )}
+        childFactory={child =>
+          React.cloneElement(child, {
+            classNames: ANIMATION_MAP[history.action]
+          })
+        }
       >
-        <CSSTransition
-          timeout={500}
-          key={location.pathname}
-        >
-          <Switch location={location}>
-            {renderRoutes(routes)}
-          </Switch>
+        <CSSTransition timeout={500} key={location.pathname}>
+          <Switch location={location}>{renderRoutes(routes)}</Switch>
         </CSSTransition>
       </TransitionGroup>
     </div>

@@ -16,14 +16,14 @@ class Toast extends Component {
     type: PropTypes.oneOf(['info', 'success', 'fail', 'loading']), // 类型
     duration: PropTypes.number, // 显示时间
     onClose: PropTypes.func, // 关闭后的回调
-    icon: PropTypes.any// 自定义图标
-  }
+    icon: PropTypes.any // 自定义图标
+  };
 
   static defaultProps = {
     prefixCls: 'sty-toast',
     duration: 2.5,
-    onClose: () => { }
-  }
+    onClose: () => {}
+  };
 
   componentDidMount() {
     this.startCloseTimer();
@@ -39,7 +39,7 @@ class Toast extends Component {
       this.clearCloseTimer();
       this.props.onClose();
     }, 500);
-  }
+  };
 
   startCloseTimer = () => {
     if (this.props.duration) {
@@ -47,14 +47,14 @@ class Toast extends Component {
         this.close();
       }, this.props.duration * 1000);
     }
-  }
+  };
 
   clearCloseTimer = () => {
     if (this.closeTimer) {
       clearTimeout(this.closeTimer);
       this.closeTimer = null;
     }
-  }
+  };
 
   renderIcon = () => {
     let { icon, type } = this.props;
@@ -73,25 +73,34 @@ class Toast extends Component {
       return icon;
     }
     return <Icon type={type} size={36} />;
-  }
+  };
 
   render() {
-    const { prefixCls, icon, type, content, className, style, ...other } = this.props;
+    const {
+      prefixCls,
+      icon,
+      type,
+      content,
+      className,
+      style,
+      ...other
+    } = this.props;
     return (
       <div className={`${prefixCls}-mask`}>
         <div
-          ref={el => this.toast = el}
+          ref={el => (this.toast = el)}
           className={classnames({
             [className]: className,
             [prefixCls]: true,
             [`${prefixCls}-text`]: true,
             [`${prefixCls}-icon`]: icon || type !== 'info'
           })}
-          {...other}>
+          {...other}
+        >
           {this.renderIcon()}
           <div className={`${prefixCls}-text-info`}>{content}</div>
         </div>
-      </div >
+      </div>
     );
   }
 }
@@ -112,15 +121,47 @@ function notice(config) {
 
 export default {
   info({ content, duration, icon, onClose, className, style }) {
-    return notice({ content, duration, icon, onClose, type: 'info', className, style });
+    return notice({
+      content,
+      duration,
+      icon,
+      onClose,
+      type: 'info',
+      className,
+      style
+    });
   },
   loading({ content, duration, icon, onClose, className, style }) {
-    return notice({ content, duration, icon, onClose, type: 'loading', className, style });
+    return notice({
+      content,
+      duration,
+      icon,
+      onClose,
+      type: 'loading',
+      className,
+      style
+    });
   },
   fail({ content, duration, icon, onClose, className, style }) {
-    return notice({ content, duration, icon, onClose, type: 'fail', className, style });
+    return notice({
+      content,
+      duration,
+      icon,
+      onClose,
+      type: 'fail',
+      className,
+      style
+    });
   },
   success({ content, duration, icon, onClose, className, style }) {
-    return notice({ content, duration, icon, onClose, type: 'success', className, style });
+    return notice({
+      content,
+      duration,
+      icon,
+      onClose,
+      type: 'success',
+      className,
+      style
+    });
   }
 };

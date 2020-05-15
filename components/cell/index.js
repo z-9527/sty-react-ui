@@ -14,7 +14,7 @@ class Cell extends Component {
     arrow: PropTypes.oneOf(['left', 'up', 'right', 'down', 'none']), // 箭头方向
     center: PropTypes.bool, // 内容是否居中
     ripple: PropTypes.bool // 是否开启水波纹效果
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-cell',
@@ -22,13 +22,23 @@ class Cell extends Component {
     arrow: 'none',
     center: false,
     ripple: false
-  }
+  };
 
-  state = {}
+  state = {};
   render() {
     const {
-      prefixCls, className, title, label, children, clickable, arrow, style, onClick = () => { },
-      center, ripple, ...other
+      prefixCls,
+      className,
+      title,
+      label,
+      children,
+      clickable,
+      arrow,
+      style,
+      onClick = () => {},
+      center,
+      ripple,
+      ...other
     } = this.props;
     const cls = {
       [prefixCls]: true,
@@ -41,11 +51,13 @@ class Cell extends Component {
         className={classnames(cls)}
         style={style}
         onClick={onClick}
-      // {...other}
+        // {...other}
       >
         <div className={`${prefixCls}-title`}>
           <div>{title}</div>
-          {label !== undefined && <div className={`${prefixCls}-label`}>{label}</div>}
+          {label !== undefined && (
+            <div className={`${prefixCls}-label`}>{label}</div>
+          )}
         </div>
         <div className={`${prefixCls}-value`}>
           {React.Children.map(children, child => {
@@ -57,9 +69,10 @@ class Cell extends Component {
             }
             return child;
           })}
-
         </div>
-        {arrow !== 'none' && <Icon className='arrow-icon' type={`arrow-${arrow}`} />}
+        {arrow !== 'none' && (
+          <Icon className='arrow-icon' type={`arrow-${arrow}`} />
+        )}
         {ripple && <Ripple className={`${prefixCls}-ripple`} />}
       </div>
     );

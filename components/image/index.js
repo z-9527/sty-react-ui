@@ -6,7 +6,19 @@ import { classnames } from '@components/_utils';
 import './index.less';
 
 function Image(props) {
-  const { width, height, round, radius, fit, src, alt, lazy, prefixCls, className, style } = props;
+  const {
+    width,
+    height,
+    round,
+    radius,
+    fit,
+    src,
+    alt,
+    lazy,
+    prefixCls,
+    className,
+    style
+  } = props;
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -112,9 +124,9 @@ Image.defaultProps = {
   round: false,
   fit: 'fill',
   lazy: false,
-  onLoad: () => { },
-  onError: () => { },
-  onClick: () => { }
+  onLoad: () => {},
+  onError: () => {},
+  onClick: () => {}
 };
 
 export default Image;

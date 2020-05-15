@@ -16,18 +16,17 @@ class ActionSheet extends Component {
     description: PropTypes.string, // 选项上方的描述信息
     cancelText: PropTypes.string, // 取消按钮文字
     onSelect: PropTypes.func // 选中的回调函数
-
-  }
+  };
 
   static defaultProps = {
     prefixCls: 'sty-actionSheet',
     visible: false,
-    onClose: () => { },
+    onClose: () => {},
     actions: [],
     title: '',
     description: '',
     onSelect: () => {}
-  }
+  };
 
   Header = () => {
     const { title, onClose, prefixCls } = this.props;
@@ -35,42 +34,50 @@ class ActionSheet extends Component {
       return (
         <div className={`${prefixCls}-header`}>
           {title}
-          <Icon
-            className='icon'
-            type='cross'
-            onClick={onClose}
-          />
+          <Icon className='icon' type='cross' onClick={onClose} />
         </div>
       );
     }
-  }
+  };
 
   Description = () => {
     const { description, prefixCls } = this.props;
     if (description) {
-      return (
-        <div className={`${prefixCls}-description`}>
-          {description}
-        </div>
-      );
+      return <div className={`${prefixCls}-description`}>{description}</div>;
     }
-  }
+  };
 
   Actions = () => {
     const { prefixCls, actions, onSelect } = this.props;
     return actions.map((item, index) => (
       <Button
-        onClick={() => { onSelect(index); }}
+        onClick={() => {
+          onSelect(index);
+        }}
         key={index}
         loading={item.loading}
         disabled={item.disabled}
-        className={classnames('sty-hairline', 'sty-hairline--top', item.className, `${prefixCls}-action`)}
+        className={classnames(
+          'sty-hairline',
+          'sty-hairline--top',
+          item.className,
+          `${prefixCls}-action`
+        )}
       >
-        {item.name && !item.loading && <span className={`${prefixCls}-action-name`} style={{ color: item.color }}>{item.name}</span>}
-        {item.subname && !item.loading && <span className={`${prefixCls}-action-subname`}>{item.subname}</span>}
+        {item.name && !item.loading && (
+          <span
+            className={`${prefixCls}-action-name`}
+            style={{ color: item.color }}
+          >
+            {item.name}
+          </span>
+        )}
+        {item.subname && !item.loading && (
+          <span className={`${prefixCls}-action-subname`}>{item.subname}</span>
+        )}
       </Button>
     ));
-  }
+  };
 
   CancelText = () => {
     const { cancelText, prefixCls, onClose } = this.props;
@@ -81,13 +88,21 @@ class ActionSheet extends Component {
         </div>
       );
     }
-  }
+  };
 
-  state = {}
+  state = {};
   render() {
     const {
-      prefixCls, className, visible, onClose, title, description,
-      children, cancelText, actions, ...other
+      prefixCls,
+      className,
+      visible,
+      onClose,
+      title,
+      description,
+      children,
+      cancelText,
+      actions,
+      ...other
     } = this.props;
     return (
       <Popup

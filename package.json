@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --open --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.prod.js",
     "analyz": "webpack-bundle-analyzer --port 8001 ./build/stats.json",
-    "lint": "eslint site components"
+    "lint": "eslint site components",
+    "fix": "eslint --fix site components"
   },
   "husky": {
     "hooks": {
@@ -31,6 +32,7 @@
     "eslint-loader": "^3.0.2",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-standard": "^4.0.1",
@@ -41,6 +43,7 @@
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prettier": "^2.0.5",
     "style-loader": "^1.0.0",
     "url-loader": "^4.1.0",
     "webpack": "^4.41.2",

@@ -16,9 +16,8 @@ class Popup extends Component {
     round: PropTypes.bool, // 是否是圆角
     closable: PropTypes.bool, // 是否显示关闭icon
     duration: PropTypes.number, // 动画时长，单位毫秒
-    transitionName: PropTypes.string// 主体过渡动画名称
-
-  }
+    transitionName: PropTypes.string // 主体过渡动画名称
+  };
 
   static defaultProps = {
     prefixCls: 'sty-popup',
@@ -26,24 +25,34 @@ class Popup extends Component {
     position: 'center',
     visible: false,
     overlayClosable: true,
-    onClose: () => { },
+    onClose: () => {},
     round: false,
     closable: false,
     duration: 300
-
-  }
+  };
 
   onOverlayClick = () => {
     if (this.props.overlayClosable) {
       this.props.onClose();
     }
-  }
+  };
 
-  state = {}
+  state = {};
   render() {
     let {
-      prefixCls, position, overlay, visible, overlayClosable, duration, className,
-      onClose, round, closable, children, transitionName, ...other
+      prefixCls,
+      position,
+      overlay,
+      visible,
+      overlayClosable,
+      duration,
+      className,
+      onClose,
+      round,
+      closable,
+      children,
+      transitionName,
+      ...other
     } = this.props;
     const isCenter = position === 'center';
     if (!transitionName) {
@@ -60,7 +69,8 @@ class Popup extends Component {
           >
             <div
               className={`${prefixCls}-overlay`}
-              onClick={this.onOverlayClick} />
+              onClick={this.onOverlayClick}
+            />
           </CSSTransition>
         )}
         <CSSTransition
@@ -69,13 +79,22 @@ class Popup extends Component {
           classNames={transitionName}
           unmountOnExit
         >
-          <div {...other} className={classnames({
-            [className]: className,
-            [prefixCls]: true,
-            [`${prefixCls}-${position}`]: true,
-            [`${prefixCls}-round`]: round
-          })}>
-            {closable && <Icon onClick={this.props.onClose} className='close-icon' type='cross' />}
+          <div
+            {...other}
+            className={classnames({
+              [className]: className,
+              [prefixCls]: true,
+              [`${prefixCls}-${position}`]: true,
+              [`${prefixCls}-round`]: round
+            })}
+          >
+            {closable && (
+              <Icon
+                onClick={this.props.onClose}
+                className='close-icon'
+                type='cross'
+              />
+            )}
             {children}
           </div>
         </CSSTransition>

@@ -6,13 +6,13 @@ import { Switch, Cell } from '@components';
 class SwitchPage extends Component {
   state = {
     checked: true
-  }
+  };
 
-  onChange = (checked) => {
+  onChange = checked => {
     this.setState({
       checked
     });
-  }
+  };
 
   render() {
     return (
@@ -33,7 +33,7 @@ class SwitchPage extends Component {
         <Cell center title='受控状态'>
           <Switch checked={this.state.checked} onChange={this.onChange} />
         </Cell>
-        <Cell center >
+        <Cell center>
           <Switch checked={this.state.checked} onChange={this.onChange} />
         </Cell>
       </div>

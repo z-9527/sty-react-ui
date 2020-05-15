@@ -12,20 +12,20 @@ class RadioGroup extends Component {
     value: PropTypes.any, // 当前选中值
     defaultValue: PropTypes.any, // 默认选中值
     onChange: PropTypes.func, // 选项变化的函数
-    cell: PropTypes.bool// 是否配合cell使用
-  }
+    cell: PropTypes.bool // 是否配合cell使用
+  };
 
   static defaultProps = {
     prefixCls: 'sty-radio-group',
     direction: 'vertical',
     shape: 'round',
-    onChange: () => { },
+    onChange: () => {},
     cell: false
-  }
+  };
 
   state = {
     value: undefined
-  }
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { value } = nextProps;
@@ -43,12 +43,12 @@ class RadioGroup extends Component {
     });
   }
 
-  onChange = (value) => {
+  onChange = value => {
     this.props.onChange(value);
     this.setState({
       value
     });
-  }
+  };
 
   renderItem = () => {
     const { children, shape, color, cell } = this.props;
@@ -68,12 +68,21 @@ class RadioGroup extends Component {
 
       return child;
     });
-  }
+  };
 
   render() {
     const {
-      prefixCls, direction, shape, color, value, defaultValue,
-      onChange, children, className, cell, ...other
+      prefixCls,
+      direction,
+      shape,
+      color,
+      value,
+      defaultValue,
+      onChange,
+      children,
+      className,
+      cell,
+      ...other
     } = this.props;
     const cls = {
       [className]: className,

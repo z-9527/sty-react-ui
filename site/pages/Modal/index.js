@@ -4,7 +4,7 @@ import renderHeader from '../renderHeader';
 import './index.less';
 
 function asynClose() {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve();
     }, 2000);
@@ -12,12 +12,20 @@ function asynClose() {
 }
 
 const actions = [
-  { text: '取消', onPress: () => console.log('点击了取消'), style: { color: '#000' } },
+  {
+    text: '取消',
+    onPress: () => console.log('点击了取消'),
+    style: { color: '#000' }
+  },
   { text: '确定', onPress: () => console.log('确定') }
 ];
 
 const asynActions = [
-  { text: '取消', onPress: () => console.log('点击了取消'), style: { color: '#000' } },
+  {
+    text: '取消',
+    onPress: () => console.log('点击了取消'),
+    style: { color: '#000' }
+  },
   { text: '确定', onPress: asynClose }
 ];
 
@@ -28,31 +36,33 @@ class ModalPage extends Component {
     visible2: false,
     visible3: false,
     visible4: false
-  }
+  };
 
   test = () => {
     Modal.alert({
       message: '信息',
       title: '标题',
-      actions: [{
-        text: '确认',
-        onPress: () => { },
-        style: {}
-      }]
+      actions: [
+        {
+          text: '确认',
+          onPress: () => {},
+          style: {}
+        }
+      ]
     });
-  }
+  };
 
-  onShow = (key) => {
+  onShow = key => {
     this.setState({
       [key]: true
     });
-  }
+  };
 
-  onClose = (key) => {
+  onClose = key => {
     this.setState({
       [key]: false
     });
-  }
+  };
 
   render() {
     const { visible1, visible2, visible3, visible4 } = this.state;
@@ -101,7 +111,6 @@ class ModalPage extends Component {
         >
           代码是写出来给人看的，附带能在机器上运行
         </Modal>
-
       </div>
     );
   }
