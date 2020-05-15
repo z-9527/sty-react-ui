@@ -127,7 +127,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].css', // 打包到static的css目录下
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
-      ignoreOrder: false // Enable to remove warnings about conflicting order
+      ignoreOrder: true // Enable to remove warnings about conflicting order
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
