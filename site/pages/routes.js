@@ -19,6 +19,7 @@ const SwipePage = asyncComponent(() => import('./Swipe'));
 const ToastPage = asyncComponent(() => import('./Toast'));
 const ActionSheetPage = asyncComponent(() => import('./ActionSheet'));
 const ModalPage = asyncComponent(() => import('./Modal'));
+const ImagePage = asyncComponent(() => import('./Image'));
 
 let routes = [
   {
@@ -93,6 +94,10 @@ let routes = [
   {
     path: '/modal',
     component: ModalPage
+  },
+  {
+    path: '/image',
+    component: ImagePage
   }
 ];
 

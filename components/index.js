@@ -4,6 +4,7 @@ export { default as Button } from './button';
 export { default as Cell } from './cell';
 export { default as Checkbox } from './checkbox';
 export { default as Icon } from './icon';
+export { default as Image } from './image';
 export { default as IndexList } from './index-list';
 export { default as Loading } from './loading';
 export { default as Modal } from './modal';
