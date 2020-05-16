@@ -75,26 +75,26 @@ function Image(props) {
     );
   }
   useEffect(() => {
-    const target = img.current;
-    let observer = new IntersectionObserver(entries => {
-      entries.forEach(item => {
-        if (item.isIntersecting) {
-          let image = document.createElement('img');
-          image.src = target.dataset.src;
-          image.onload = onLoad;
-          image.onerror = onError;
-          target.src = target.dataset.src;
-          observer.unobserve(target);
-          image = null;
-        }
+    if (lazy && 'IntersectionObserver' in window) {
+      const target = img.current;
+      let observer = new IntersectionObserver(entries => {
+        entries.forEach(item => {
+          if (item.isIntersecting) {
+            let image = document.createElement('img');
+            image.src = target.dataset.src;
+            image.onload = onLoad;
+            image.onerror = onError;
+            target.src = target.dataset.src;
+            observer.unobserve(target);
+            image = null;
+          }
+        });
       });
-    });
-    if (lazy) {
       observer.observe(target);
+      return () => {
+        observer = null;
+      };
     }
-    return () => {
-      observer = null;
-    };
   }, []);
   return (
     <div className={classnames(prefixCls, className)} style={boxSty}>

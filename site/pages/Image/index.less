@@ -1,9 +1,34 @@
-.image-demo{
+.image-demo {
   padding: 16px;
   background-color: #fff;
 
-  .sty-img{
-    display: inline-block;
-    margin-right: 16px;
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .item {
+      width: 100px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+
+      .text {
+        color: #646566;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    }
+
+    .have-border {
+      border: 1px dashed #ddd;
+    }
   }
+
+  .lazy-list{
+    height: 230px;
+    width: 100px;
+    border: 1px dashed #ddd;
+    overflow: auto;
+  }
+
 }
