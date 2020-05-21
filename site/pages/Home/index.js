@@ -61,6 +61,9 @@ class Home extends Component {
           <li>
             <Link to='/image'>image</Link>
           </li>
+          <li>
+            <Link to='/pull-refresh'>refresh</Link>
+          </li>
         </ul>
       </div>
     );

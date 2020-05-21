@@ -3,6 +3,7 @@ import { useLocation, useHistory, Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { renderRoutes } from 'react-router-config';
 import routes from './pages/routes';
+import '@vant/touch-emulator';
 import './app.css';
 
 // 页面过渡动画参考这里https://juejin.im/post/5cb1e4275188251ace1feee9

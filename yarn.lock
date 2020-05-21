@@ -460,6 +460,11 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
+"@vant/touch-emulator@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@vant/touch-emulator/-/touch-emulator-1.2.0.tgz#486300b23e57db9ce9231a04e0a0c621c68692d8"
+  integrity sha512-sJ97zU85zOq51qoi7+CpBEcOyH3CitjP1KC7/GQwqaurUJni+EP7/F9n0HMnAh8GXMjgtgDBNJ5z48x+coNKYQ==
+
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.8.5.tgz#51b1c5fe6576a34953bf4b253df9f0d490d9e359"

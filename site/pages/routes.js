@@ -20,6 +20,7 @@ const ToastPage = asyncComponent(() => import('./Toast'));
 const ActionSheetPage = asyncComponent(() => import('./ActionSheet'));
 const ModalPage = asyncComponent(() => import('./Modal'));
 const ImagePage = asyncComponent(() => import('./Image'));
+const PullRefreshPage = asyncComponent(() => import('./PullRefresh'));
 
 let routes = [
   {
@@ -98,6 +99,10 @@ let routes = [
   {
     path: '/image',
     component: ImagePage
+  },
+  {
+    path: '/pull-refresh',
+    component: PullRefreshPage
   }
 ];
 

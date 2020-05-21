@@ -9,6 +9,7 @@ export { default as Loading } from './loading';
 export { default as Modal } from './modal';
 export { default as NavBar } from './nav-bar';
 export { default as Popup } from './popup';
+export { default as PullRefresh } from './pull-refresh';
 export { default as Radio } from './radio';
 export { default as Ripple } from './ripple';
 export { default as Swipe } from './swipe';
