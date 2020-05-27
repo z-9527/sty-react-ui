@@ -34,6 +34,7 @@
       font-size: 16px;
       line-height: 20px;
       text-align: center;
+      color: @base-text-color;
     }
   }
 
@@ -43,12 +44,15 @@
     left: 0;
     width: 100%;
     height: 100%;
-    color: #1989fa;
     background-color: rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 4;
+
+    .sty-loading{
+      color: #1989fa;
+    }
   }
 
   &-columns {
@@ -62,13 +66,14 @@
     flex: 1;
     user-select: none;
     font-size: 16px;
-    color: #000;
+    color: @base-text-color;
     overflow: hidden;
 
     ul {
       width: 100%;
       height: 100%;
       transition-timing-function: cubic-bezier(0.23, 1, 0.68, 1);
+      touch-action: none;
 
       li {
         width: 100%;

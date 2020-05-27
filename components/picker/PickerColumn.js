@@ -46,6 +46,7 @@ function PickerColumn(props) {
     if (!toucheCur) {
       return;
     }
+    event.preventDefault();
     const { touches } = event;
     const offsetX = touches[0].clientX - toucheCur.startX;
     const offsetY = touches[0].clientY - toucheCur.startY;
