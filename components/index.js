@@ -8,6 +8,7 @@ export { default as IndexList } from './index-list';
 export { default as Loading } from './loading';
 export { default as Modal } from './modal';
 export { default as NavBar } from './nav-bar';
+export { default as Picker } from './picker';
 export { default as Popup } from './popup';
 export { default as PullRefresh } from './pull-refresh';
 export { default as Radio } from './radio';

@@ -1,0 +1,107 @@
+@import '../style/default.less';
+
+@pickerPrefixCls: sty-picker;
+
+.@{pickerPrefixCls} {
+  position: relative;
+  background-color: #fff;
+
+  &-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 44px;
+
+    &>button {
+      padding: 0 16px;
+      font-size: 14px;
+      background-color: transparent;
+      border: none;
+      outline: none;
+    }
+
+    &-cancel {
+      color: #969799;
+    }
+
+    &-confirm {
+      color: #576b95;
+    }
+
+    &-title {
+      max-width: 50%;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+
+  &-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #1989fa;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+  }
+
+  &-columns {
+    position: relative;
+    display: flex;
+    cursor: grab;
+  }
+
+  &-column {
+    display: flex;
+    flex: 1;
+    user-select: none;
+    font-size: 16px;
+    color: #000;
+    overflow: hidden;
+
+    ul {
+      width: 100%;
+      height: 100%;
+      transition-timing-function: cubic-bezier(0.23, 1, 0.68, 1);
+
+      li {
+        width: 100%;
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+      }
+    }
+  }
+
+  &-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.4)), linear-gradient(0deg, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.4));
+    background-repeat: no-repeat;
+    background-position: top, bottom;
+    background-size: 100% 88px;
+    pointer-events: none; //这个属性非常重要，因为层叠属性，事件作用到的对象是这一层，使用了这个属性后，鼠标或手势会穿透或冒泡
+    z-index: 2;
+  }
+
+  &-frame {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    left: 16px;
+    height: 44px;
+    transform: translateY(-50%);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+}

@@ -64,6 +64,9 @@ class Home extends Component {
           <li>
             <Link to='/pull-refresh'>refresh</Link>
           </li>
+          <li>
+            <Link to='/picker'>picker</Link>
+          </li>
         </ul>
       </div>
     );

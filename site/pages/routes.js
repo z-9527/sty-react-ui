@@ -21,6 +21,7 @@ const ActionSheetPage = asyncComponent(() => import('./ActionSheet'));
 const ModalPage = asyncComponent(() => import('./Modal'));
 const ImagePage = asyncComponent(() => import('./Image'));
 const PullRefreshPage = asyncComponent(() => import('./PullRefresh'));
+const PickerPage = asyncComponent(() => import('./Picker'));
 
 let routes = [
   {
@@ -103,6 +104,10 @@ let routes = [
   {
     path: '/pull-refresh',
     component: PullRefreshPage
+  },
+  {
+    path: '/picker',
+    component: PickerPage
   }
 ];
 
