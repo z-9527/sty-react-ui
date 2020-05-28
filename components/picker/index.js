@@ -14,32 +14,66 @@ function Picker(props) {
     visibleCount,
     loading,
     defaultValue,
+    cascade,
     onCancel,
     onConfirm
   } = props;
 
   const [value, setValue] = useState([]);
+  const [columns, setColumns] = useState(() => data);
 
   useEffect(() => {
     Array.isArray(props.value) && setValue(props.value);
   }, [props.value]);
 
-  function onColumnChange(index, columnValue, emitChange) {
+  useEffect(() => {
+    Array.isArray(data) && setColumns(data);
+    formatCascade(0, defaultValue[0]);
+  }, [data]);
+
+  function formatCascade(startColumnIndex, startColumnValue) {
+    if (!cascade) {
+      return;
+    }
+    const list = columns.slice(0, startColumnIndex + 1);
+    const itemIndex = getIndexOfValue(startColumnValue, list[startColumnIndex]);
+    let cursor = { children: list[startColumnIndex][itemIndex].children };
+    for (let i = startColumnIndex + 1; cursor && cursor.children; i++) {
+      list.push(cursor.children);
+      const index = getIndexOfValue(value[i], cursor.children);
+      cursor = { children: cursor.children[index].children };
+    }
+    setColumns(list);
+  }
+
+  function getIndexOfValue(value, list) {
+    let index = 0;
+    const findIndex = list ? list.findIndex(i => i.value === value) : 0;
+    if (findIndex !== -1) {
+      index = findIndex;
+    }
+    return index;
+  }
+
+  function onColumnChange(columnIndex, columnValue, emitChange) {
     setValue(preList => {
       const list = preList.slice();
-      list[index] = columnValue;
-      emitChange && props.onChange(list);
-      if (Array.isArray(props.value)) {
-        return preList; // 由外部的stat控制
-      }
+      list[columnIndex] = columnValue;
+      // emitChange && props.onChange(list); //受控时，初始值有问题，第一次值没设置上
+      props.onChange(list);
+      onCascadeChange(columnIndex, columnValue);
       return list;
     });
   }
 
+  function onCascadeChange(index, columnValue) {
+    formatCascade(index, columnValue);
+  }
+
   function genColumns() {
     return (
-      Array.isArray(data) &&
-      data.map((item, index) => (
+      Array.isArray(columns) &&
+      columns.map((item, index) => (
         <PickerColumn
           key={index}
           prefixCls={prefixCls}
@@ -97,6 +131,7 @@ Picker.propTypes = {
   loading: PropTypes.bool,
   value: PropTypes.array, // 受控值
   defaultValue: PropTypes.array,
+  cascade: PropTypes.bool,
   onChange: PropTypes.func,
   onCancel: PropTypes.func,
   onConfirm: PropTypes.func
@@ -110,6 +145,7 @@ Picker.defaultProps = {
   visibleCount: 5,
   loading: false,
   defaultValue: [],
+  cascade: false,
   onChange: () => {},
   onCancel: () => {},
   onConfirm: () => {}

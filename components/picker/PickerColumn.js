@@ -7,15 +7,7 @@ function PickerColumn(props) {
 
   const [translateY, setTranslateY] = useState(0);
   const [duration, setDuration] = useState(DEFAULT_DURATION);
-  const [currentIndex, setCurrentIndex] = useState(-1);
-
-  const touch = useRef(null);
-  const baseOffset = (44 * (visibleCount - 1)) / 2;
-  const sty = {
-    transform: `translate3d(0,${translateY + baseOffset}px,0)`, // 通过3d变换开启浏览器的硬件加速
-    transitionDuration: `${duration}ms`
-  };
-  const arr = Array.isArray(list) ? list : [];
+  const currentIndex = useRef(-1);
 
   useEffect(() => {
     const index = getIndex(defaultValue);
@@ -28,6 +20,20 @@ function PickerColumn(props) {
       setIndex(index);
     }
   }, [columnValue]);
+
+  useEffect(() => {
+    currentIndex.current = -1;
+    const index = getIndex(defaultValue);
+    setIndex(index);
+  }, [list]);
+
+  const touch = useRef(null);
+  const baseOffset = (44 * (visibleCount - 1)) / 2;
+  const sty = {
+    transform: `translate3d(0,${translateY + baseOffset}px,0)`, // 通过3d变换开启浏览器的硬件加速
+    transitionDuration: `${duration}ms`
+  };
+  const arr = Array.isArray(list) ? list : [];
 
   function onTouchStart(event) {
     event.persist();
@@ -84,8 +90,8 @@ function PickerColumn(props) {
     const index = adjustIndex(i);
     const offset = -44 * index;
     setTranslateY(offset);
-    if (index !== currentIndex) {
-      setCurrentIndex(index);
+    if (index !== currentIndex.current) {
+      currentIndex.current = index;
       props.onColumnChange(arr[index].value, emitChange);
     }
   }
