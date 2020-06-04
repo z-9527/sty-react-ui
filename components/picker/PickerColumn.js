@@ -1,54 +1,55 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const DEFAULT_DURATION = 300;
-
-function PickerColumn(props) {
-  const { prefixCls, list, visibleCount, defaultValue, columnValue } = props;
-
-  const [translateY, setTranslateY] = useState(0);
-  const [duration, setDuration] = useState(DEFAULT_DURATION);
-  const currentIndex = useRef(-1);
-
-  useEffect(() => {
-    const index = getIndex(defaultValue);
-    setIndex(index);
-  }, []);
-
-  useEffect(() => {
-    if (columnValue) {
-      const index = getIndex(columnValue);
-      setIndex(index);
-    }
-  }, [columnValue]);
-
-  useEffect(() => {
-    currentIndex.current = -1;
-    const index = getIndex(defaultValue);
-    setIndex(index);
-  }, [list]);
-
-  const touch = useRef(null);
-  const baseOffset = (44 * (visibleCount - 1)) / 2;
-  const sty = {
-    transform: `translate3d(0,${translateY + baseOffset}px,0)`, // 通过3d变换开启浏览器的硬件加速
-    transitionDuration: `${duration}ms`
-  };
-  const arr = Array.isArray(list) ? list : [];
-
-  function onTouchStart(event) {
-    event.persist();
-    const { touches } = event;
-    touch.current = {
-      startX: touches[0].clientX,
-      startY: touches[0].clientY,
-      translateY
+class PickerColumn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      translateY: 0,
+      duration: DEFAULT_DURATION
     };
-    setDuration(0);
+    this.currentIndex = -1;
+    this.touch = null;
   }
 
-  function onTouchMove(event) {
+  componentDidMount() {
+    const index = this.getIndex(
+      this.props.columnValue || this.props.defaultValue
+    );
+    this.setIndex(index);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.list !== prevProps.list) {
+      this.currentIndex = -1;
+      const index = this.getIndex(this.props.defaultValue);
+      this.setIndex(index);
+    }
+    if (
+      this.props.columnValue &&
+      this.props.columnValue !== prevProps.columnValue
+    ) {
+      const index = this.getIndex(this.props.columnValue);
+      this.setIndex(index);
+    }
+  }
+
+  onTouchStart = event => {
     event.persist();
-    const toucheCur = touch.current;
+    const { touches } = event;
+    this.touch = {
+      startX: touches[0].clientX,
+      startY: touches[0].clientY,
+      translateY: this.state.translateY
+    };
+    this.setState({
+      duration: 0
+    });
+  };
+
+  onTouchMove = event => {
+    event.persist();
+    const toucheCur = this.touch;
     if (!toucheCur) {
       return;
     }
@@ -60,48 +61,58 @@ function PickerColumn(props) {
       return;
     }
     let offset = toucheCur.translateY + offsetY;
-    offset = Math.min(44, Math.max(offset, -44 * arr.length)); // 限制偏移区间 [-44*arr.length, 44]
+    offset = Math.min(44, Math.max(offset, -44 * this.props.list.length)); // 限制偏移区间 [-44*arr.length, 44]
     if (Math.abs(offset) > 10) {
-      touch.current.moving = true;
+      this.touch.moving = true;
     }
-    setTranslateY(offset);
-  }
+    this.setState({
+      translateY: offset
+    });
+  };
 
-  function onTouchEnd() {
-    setDuration(DEFAULT_DURATION);
+  onTouchEnd = () => {
+    this.setState({
+      duration: DEFAULT_DURATION
+    });
     // 防止点击事件触发onTouchEnd
-    if (!touch.current.moving) {
+    if (!this.touch.moving) {
       return;
     }
-    const index = getIndexByOffset(translateY);
-    setIndex(index, true);
-  }
+    const index = this.getIndexByOffset(this.state.translateY);
+    this.setIndex(index, true);
+  };
 
-  function getIndex(value) {
+  getIndex = value => {
     let index = 0;
-    const findIndex = arr.findIndex(i => i.value === value);
+    const findIndex = this.props.list.findIndex(i => i.value === value);
     if (findIndex !== -1) {
       index = findIndex;
     }
     return index;
-  }
+  };
 
-  function setIndex(i, emitChange) {
-    const index = adjustIndex(i);
+  setIndex = (i, emitChange) => {
+    const index = this.adjustIndex(i);
     const offset = -44 * index;
-    setTranslateY(offset);
-    if (index !== currentIndex.current) {
-      currentIndex.current = index;
-      props.onColumnChange(arr[index].value, emitChange);
+    this.setState({
+      translateY: offset
+    });
+    if (index !== this.currentIndex) {
+      this.currentIndex = index;
+      this.props.onColumnChange(this.props.list[index].value, emitChange);
     }
-  }
+  };
 
-  function getIndexByOffset(offset) {
-    return Math.min(arr.length - 1, Math.max(0, Math.round(-offset / 44))); // 索引区间 [0,length-1]
-  }
+  getIndexByOffset = offset => {
+    return Math.min(
+      this.props.list.length - 1,
+      Math.max(0, Math.round(-offset / 44))
+    ); // 索引区间 [0,length-1]
+  };
 
   // 主要是解决disabled选项
-  function adjustIndex(index) {
+  adjustIndex = index => {
+    const arr = this.props.list;
     index = Math.min(arr.length - 1, Math.max(0, index));
     for (let i = index; i < arr.length; i++) {
       if (!arr[i].disabled) {
@@ -114,36 +125,46 @@ function PickerColumn(props) {
       }
     }
     return index;
-  }
+  };
 
-  function onItemClick(index) {
+  onItemClick = index => {
     // 防止touch事件触发click
-    if (touch.current && touch.current.moving) {
+    if (this.touch && this.touch.moving) {
       return;
     }
-    setIndex(index, true);
-  }
+    this.setIndex(index, true);
+  };
 
-  return (
-    <div
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-      className={`${prefixCls}-column`}
-    >
-      <ul style={sty}>
-        {arr.map((item, index) => (
-          <li
-            onClick={() => onItemClick(index)}
-            style={{ opacity: item.disabled ? 0.3 : 1 }}
-            key={item.value}
-          >
-            {item.label}
-            {item.disabled && <span style={{ fontSize: 14 }}>(禁用)</span>}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  render() {
+    const { visibleCount, prefixCls, list } = this.props;
+    const { translateY, duration } = this.state;
+    const baseOffset = (44 * (visibleCount - 1)) / 2;
+    const sty = {
+      transform: `translate3d(0,${translateY + baseOffset}px,0)`, // 通过3d变换开启浏览器的硬件加速
+      transitionDuration: `${duration}ms`
+    };
+
+    return (
+      <div
+        onTouchStart={this.onTouchStart}
+        onTouchMove={this.onTouchMove}
+        onTouchEnd={this.onTouchEnd}
+        className={`${prefixCls}-column`}
+      >
+        <ul style={sty}>
+          {list.map((item, index) => (
+            <li
+              onClick={() => this.onItemClick(index)}
+              style={{ opacity: item.disabled ? 0.3 : 1 }}
+              key={item.value}
+            >
+              {item.label}
+              {item.disabled && <span style={{ fontSize: 14 }}>(禁用)</span>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
 export default PickerColumn;

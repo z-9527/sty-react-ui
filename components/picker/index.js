@@ -1,76 +1,85 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import PickerColumn from './PickerColumn';
 import Loading from '../loading';
 import './index.less';
+// 刚开始用hooks做的，有点问题，改为了class
+class Picker extends React.Component {
+  state = {
+    value: [],
+    columns: []
+  };
 
-function Picker(props) {
-  const {
-    prefixCls,
-    title,
-    confirmText,
-    cancelText,
-    data,
-    visibleCount,
-    loading,
-    defaultValue,
-    cascade,
-    onCancel,
-    onConfirm
-  } = props;
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { value } = nextProps;
+    if (value && value !== prevState.value) {
+      return {
+        value: value.slice()
+      };
+    }
+    return null;
+  }
 
-  const [value, setValue] = useState([]);
-  const [columns, setColumns] = useState(() => data);
+  componentDidMount() {
+    if (Array.isArray(this.props.data)) {
+      this.setState(
+        {
+          columns: this.props.data
+        },
+        () => {
+          this.formatCascade(0, this.props.defaultValue[0]);
+        }
+      );
+    }
+  }
 
-  useEffect(() => {
-    Array.isArray(props.value) && setValue(props.value);
-  }, [props.value]);
-
-  useEffect(() => {
-    Array.isArray(data) && setColumns(data);
-    formatCascade(0, defaultValue[0]);
-  }, [data]);
-
-  function formatCascade(startColumnIndex, startColumnValue) {
-    if (!cascade) {
+  formatCascade = (startColumnIndex, startColumnValue) => {
+    if (!this.props.cascade) {
       return;
     }
-    const list = columns.slice(0, startColumnIndex + 1);
-    const itemIndex = getIndexOfValue(startColumnValue, list[startColumnIndex]);
+    const list = this.state.columns.slice(0, startColumnIndex + 1);
+    const itemIndex = this.getIndexOfValue(
+      startColumnValue,
+      list[startColumnIndex]
+    );
     let cursor = { children: list[startColumnIndex][itemIndex].children };
     for (let i = startColumnIndex + 1; cursor && cursor.children; i++) {
       list.push(cursor.children);
-      const index = getIndexOfValue(value[i], cursor.children);
+      const index = this.getIndexOfValue(this.state.value[i], cursor.children);
       cursor = { children: cursor.children[index].children };
     }
-    setColumns(list);
-  }
+    this.setState({
+      columns: list
+    });
+  };
 
-  function getIndexOfValue(value, list) {
+  getIndexOfValue = (value, list) => {
     let index = 0;
     const findIndex = list ? list.findIndex(i => i.value === value) : 0;
     if (findIndex !== -1) {
       index = findIndex;
     }
     return index;
-  }
+  };
 
-  function onColumnChange(columnIndex, columnValue, emitChange) {
-    setValue(preList => {
-      const list = preList.slice();
-      list[columnIndex] = columnValue;
-      // emitChange && props.onChange(list); //受控时，初始值有问题，第一次值没设置上
-      props.onChange(list);
-      onCascadeChange(columnIndex, columnValue);
-      return list;
+  onColumnChange = (columnIndex, columnValue, emitChange) => {
+    const list = this.state.value;
+    list[columnIndex] = columnValue;
+    // emitChange && props.onChange(list); //受控时，初始值有问题，第一次值没设置上
+    this.props.onChange(list);
+    this.onCascadeChange(columnIndex, columnValue);
+    this.setState({
+      value: list
     });
-  }
+  };
 
-  function onCascadeChange(index, columnValue) {
-    formatCascade(index, columnValue);
-  }
+  onCascadeChange = (index, columnValue) => {
+    this.formatCascade(index, columnValue);
+  };
 
-  function genColumns() {
+  genColumns = () => {
+    const { prefixCls, defaultValue, visibleCount } = this.props;
+    const { columns, value } = this.state;
     return (
       Array.isArray(columns) &&
       columns.map((item, index) => (
@@ -82,43 +91,57 @@ function Picker(props) {
           visibleCount={visibleCount}
           columnValue={value[index]}
           onColumnChange={(v, emitChange) =>
-            onColumnChange(index, v, emitChange)
+            this.onColumnChange(index, v, emitChange)
           }
         />
       ))
     );
-  }
-  return (
-    <div className={prefixCls}>
-      <div className={`${prefixCls}-toolbar`}>
-        <button className={`${prefixCls}-toolbar-cancel`} onClick={onCancel}>
-          {cancelText}
-        </button>
-        <div className={`${prefixCls}-toolbar-title ellipsis`}>{title}</div>
-        <button
-          className={`${prefixCls}-toolbar-confirm`}
-          onClick={() => onConfirm(value)}
-        >
-          {confirmText}
-        </button>
-      </div>
-      {loading && (
-        <div className={`${prefixCls}-loading`}>
-          <Loading />
+  };
+
+  render() {
+    const {
+      prefixCls,
+      onCancel,
+      cancelText,
+      title,
+      onConfirm,
+      confirmText,
+      loading,
+      visibleCount
+    } = this.props;
+    const { value } = this.state;
+    return (
+      <div className={prefixCls}>
+        <div className={`${prefixCls}-toolbar`}>
+          <button className={`${prefixCls}-toolbar-cancel`} onClick={onCancel}>
+            {cancelText}
+          </button>
+          <div className={`${prefixCls}-toolbar-title ellipsis`}>{title}</div>
+          <button
+            className={`${prefixCls}-toolbar-confirm`}
+            onClick={() => onConfirm(value)}
+          >
+            {confirmText}
+          </button>
         </div>
-      )}
-      <div
-        className={`${prefixCls}-columns`}
-        style={{ height: visibleCount * 44 }}
-      >
-        {genColumns()}
-        <div className={`${prefixCls}-mask`}></div>
+        {loading && (
+          <div className={`${prefixCls}-loading`}>
+            <Loading />
+          </div>
+        )}
         <div
-          className={`${prefixCls}-frame sty-hairline sty-hairline--top-bottom`}
-        />
+          className={`${prefixCls}-columns`}
+          style={{ height: visibleCount * 44 }}
+        >
+          {this.genColumns()}
+          <div className={`${prefixCls}-mask`}></div>
+          <div
+            className={`${prefixCls}-frame sty-hairline sty-hairline--top-bottom`}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 Picker.propTypes = {

@@ -105,6 +105,7 @@ class PickerPage extends Component {
           defaultValue={['温州', '嘉兴']}
           title='标题'
           data={data2}
+          onChange={v => console.log(v)}
           onConfirm={v => console.log(v)}
         />
         <div className='section-title-pl mtop32'>加载状态</div>
@@ -116,11 +117,8 @@ class PickerPage extends Component {
         />
         <div className='section-title-pl mtop32'>级联选择</div>
         <Picker
-          value={this.state.value}
           onCancel={() => console.log('取消')}
           defaultValue={['福建', '厦门']}
-          // onChange={v => console.log(v)}
-          onChange={this.onChange}
           onConfirm={v => console.log(v)}
           title='标题'
           cascade
@@ -147,6 +145,8 @@ class PickerPage extends Component {
               this.toggleVisible();
               console.log('取消');
             }}
+            value={this.state.value}
+            onChange={this.onChange}
             title='标题'
             data={data2}
           />
