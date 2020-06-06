@@ -67,6 +67,9 @@ class Home extends Component {
           <li>
             <Link to='/picker'>picker</Link>
           </li>
+          <li>
+            <Link to='/date-picker'>date-picker</Link>
+          </li>
         </ul>
       </div>
     );

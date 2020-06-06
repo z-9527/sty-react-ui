@@ -22,6 +22,7 @@ const ModalPage = asyncComponent(() => import('./Modal'));
 const ImagePage = asyncComponent(() => import('./Image'));
 const PullRefreshPage = asyncComponent(() => import('./PullRefresh'));
 const PickerPage = asyncComponent(() => import('./Picker'));
+const DatePickerPage = asyncComponent(() => import('./DatePicker'));
 
 let routes = [
   {
@@ -108,6 +109,10 @@ let routes = [
   {
     path: '/picker',
     component: PickerPage
+  },
+  {
+    path: '/date-picker',
+    component: DatePickerPage
   }
 ];
 
